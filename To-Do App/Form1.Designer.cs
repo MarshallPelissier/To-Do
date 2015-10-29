@@ -28,40 +28,41 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.monthCalendar1 = new System.Windows.Forms.MonthCalendar();
+            this.mnc_Date = new System.Windows.Forms.MonthCalendar();
             this.trv_Daily_Events = new System.Windows.Forms.TreeView();
-            this.dtp_Day = new System.Windows.Forms.DateTimePicker();
-            this.listView1 = new System.Windows.Forms.ListView();
+            this.lsv_Due_Dates = new System.Windows.Forms.ListView();
             this.clm_Events = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clm_Due_Date = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.pnl_Date = new System.Windows.Forms.Panel();
             this.txt_Date = new System.Windows.Forms.TextBox();
             this.btn_Add_Event = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
-            this.menuStrip1 = new System.Windows.Forms.MenuStrip();
+            this.mnu_Main = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
+            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.projectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.projectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.projectListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1.SuspendLayout();
-            this.menuStrip1.SuspendLayout();
+            this.btn_Del_Event = new System.Windows.Forms.Button();
+            this.btn_Add_Project = new System.Windows.Forms.Button();
+            this.btn_Del_Project = new System.Windows.Forms.Button();
+            this.pnl_Date.SuspendLayout();
+            this.mnu_Main.SuspendLayout();
             this.SuspendLayout();
             // 
-            // monthCalendar1
+            // mnc_Date
             // 
-            this.monthCalendar1.Location = new System.Drawing.Point(639, 45);
-            this.monthCalendar1.MaximumSize = new System.Drawing.Size(1000, 1000);
-            this.monthCalendar1.MaxSelectionCount = 1;
-            this.monthCalendar1.Name = "monthCalendar1";
-            this.monthCalendar1.TabIndex = 0;
-            this.monthCalendar1.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
+            this.mnc_Date.Location = new System.Drawing.Point(639, 45);
+            this.mnc_Date.MaximumSize = new System.Drawing.Size(1000, 1000);
+            this.mnc_Date.MaxSelectionCount = 1;
+            this.mnc_Date.Name = "mnc_Date";
+            this.mnc_Date.TabIndex = 3;
+            this.mnc_Date.DateChanged += new System.Windows.Forms.DateRangeEventHandler(this.monthCalendar1_DateChanged);
             // 
             // trv_Daily_Events
             // 
@@ -70,26 +71,18 @@
             this.trv_Daily_Events.Size = new System.Drawing.Size(585, 440);
             this.trv_Daily_Events.TabIndex = 2;
             // 
-            // dtp_Day
+            // lsv_Due_Dates
             // 
-            this.dtp_Day.Location = new System.Drawing.Point(639, 219);
-            this.dtp_Day.Name = "dtp_Day";
-            this.dtp_Day.Size = new System.Drawing.Size(227, 20);
-            this.dtp_Day.TabIndex = 4;
-            this.dtp_Day.ValueChanged += new System.EventHandler(this.dateTimePicker1_ValueChanged);
-            // 
-            // listView1
-            // 
-            this.listView1.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.lsv_Due_Dates.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clm_Events,
             this.clm_Due_Date});
-            this.listView1.GridLines = true;
-            this.listView1.Location = new System.Drawing.Point(639, 250);
-            this.listView1.Name = "listView1";
-            this.listView1.Size = new System.Drawing.Size(227, 400);
-            this.listView1.TabIndex = 6;
-            this.listView1.UseCompatibleStateImageBehavior = false;
-            this.listView1.View = System.Windows.Forms.View.Details;
+            this.lsv_Due_Dates.GridLines = true;
+            this.lsv_Due_Dates.Location = new System.Drawing.Point(639, 219);
+            this.lsv_Due_Dates.Name = "lsv_Due_Dates";
+            this.lsv_Due_Dates.Size = new System.Drawing.Size(227, 431);
+            this.lsv_Due_Dates.TabIndex = 4;
+            this.lsv_Due_Dates.UseCompatibleStateImageBehavior = false;
+            this.lsv_Due_Dates.View = System.Windows.Forms.View.Details;
             // 
             // clm_Events
             // 
@@ -100,17 +93,19 @@
             // 
             this.clm_Due_Date.Text = "Due Date";
             // 
-            // panel1
+            // pnl_Date
             // 
-            this.panel1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.panel1.Controls.Add(this.txt_Date);
-            this.panel1.Location = new System.Drawing.Point(50, 45);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(500, 80);
-            this.panel1.TabIndex = 7;
+            this.pnl_Date.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.pnl_Date.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Date.Controls.Add(this.txt_Date);
+            this.pnl_Date.Location = new System.Drawing.Point(50, 45);
+            this.pnl_Date.Name = "pnl_Date";
+            this.pnl_Date.Size = new System.Drawing.Size(500, 80);
+            this.pnl_Date.TabIndex = 1;
             // 
             // txt_Date
             // 
+            this.txt_Date.Enabled = false;
             this.txt_Date.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_Date.Location = new System.Drawing.Point(125, 17);
             this.txt_Date.Name = "txt_Date";
@@ -123,33 +118,24 @@
             this.btn_Add_Event.Location = new System.Drawing.Point(15, 600);
             this.btn_Add_Event.Name = "btn_Add_Event";
             this.btn_Add_Event.Size = new System.Drawing.Size(100, 50);
-            this.btn_Add_Event.TabIndex = 8;
+            this.btn_Add_Event.TabIndex = 5;
             this.btn_Add_Event.Text = "New Event";
             this.btn_Add_Event.UseVisualStyleBackColor = true;
+            this.btn_Add_Event.Click += new System.EventHandler(this.btn_Add_Event_Click);
             // 
-            // button2
+            // mnu_Main
             // 
-            this.button2.Font = new System.Drawing.Font("Arial Narrow", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.button2.Location = new System.Drawing.Point(130, 600);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(100, 50);
-            this.button2.TabIndex = 9;
-            this.button2.Text = "New Project";
-            this.button2.UseVisualStyleBackColor = true;
-            // 
-            // menuStrip1
-            // 
-            this.menuStrip1.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.mnu_Main.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.mnu_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.eventsToolStripMenuItem,
             this.projectsToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
-            this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(884, 24);
-            this.menuStrip1.TabIndex = 10;
-            this.menuStrip1.Text = "menuStrip1";
-            this.menuStrip1.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
+            this.mnu_Main.Location = new System.Drawing.Point(0, 0);
+            this.mnu_Main.Name = "mnu_Main";
+            this.mnu_Main.Size = new System.Drawing.Size(884, 24);
+            this.mnu_Main.TabIndex = 0;
+            this.mnu_Main.Text = "mnuMain";
+            this.mnu_Main.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.menuStrip1_ItemClicked);
             // 
             // fileToolStripMenuItem
             // 
@@ -165,25 +151,25 @@
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.openToolStripMenuItem.Text = "Open";
             // 
             // saveToolStripMenuItem
             // 
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
             this.saveToolStripMenuItem.Text = "Save";
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(149, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
+            // 
+            // exitToolStripMenuItem
+            // 
+            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
+            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
+            this.exitToolStripMenuItem.Text = "Exit";
             // 
             // eventsToolStripMenuItem
             // 
@@ -194,6 +180,19 @@
             this.eventsToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
             this.eventsToolStripMenuItem.Text = "Events";
             // 
+            // newEventToolStripMenuItem
+            // 
+            this.newEventToolStripMenuItem.Name = "newEventToolStripMenuItem";
+            this.newEventToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newEventToolStripMenuItem.Text = "New Event";
+            this.newEventToolStripMenuItem.Click += new System.EventHandler(this.newEventToolStripMenuItem_Click_1);
+            // 
+            // eventListToolStripMenuItem
+            // 
+            this.eventListToolStripMenuItem.Name = "eventListToolStripMenuItem";
+            this.eventListToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.eventListToolStripMenuItem.Text = "Event List";
+            // 
             // projectsToolStripMenuItem
             // 
             this.projectsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -203,51 +202,67 @@
             this.projectsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
             this.projectsToolStripMenuItem.Text = "Projects";
             // 
-            // newEventToolStripMenuItem
-            // 
-            this.newEventToolStripMenuItem.Name = "newEventToolStripMenuItem";
-            this.newEventToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.newEventToolStripMenuItem.Text = "New Event";
-            // 
-            // eventListToolStripMenuItem
-            // 
-            this.eventListToolStripMenuItem.Name = "eventListToolStripMenuItem";
-            this.eventListToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
-            this.eventListToolStripMenuItem.Text = "Event List";
-            // 
             // newProjectToolStripMenuItem
             // 
             this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.newProjectToolStripMenuItem.Text = "New Project";
             // 
             // projectListToolStripMenuItem
             // 
             this.projectListToolStripMenuItem.Name = "projectListToolStripMenuItem";
-            this.projectListToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.projectListToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
             this.projectListToolStripMenuItem.Text = "Project List";
+            // 
+            // btn_Del_Event
+            // 
+            this.btn_Del_Event.Location = new System.Drawing.Point(385, 600);
+            this.btn_Del_Event.Name = "btn_Del_Event";
+            this.btn_Del_Event.Size = new System.Drawing.Size(100, 50);
+            this.btn_Del_Event.TabIndex = 7;
+            this.btn_Del_Event.Text = "Delete Event";
+            this.btn_Del_Event.UseVisualStyleBackColor = true;
+            // 
+            // btn_Add_Project
+            // 
+            this.btn_Add_Project.Location = new System.Drawing.Point(130, 600);
+            this.btn_Add_Project.Name = "btn_Add_Project";
+            this.btn_Add_Project.Size = new System.Drawing.Size(100, 50);
+            this.btn_Add_Project.TabIndex = 6;
+            this.btn_Add_Project.Text = "New Project";
+            this.btn_Add_Project.UseVisualStyleBackColor = true;
+            // 
+            // btn_Del_Project
+            // 
+            this.btn_Del_Project.Location = new System.Drawing.Point(500, 600);
+            this.btn_Del_Project.Name = "btn_Del_Project";
+            this.btn_Del_Project.Size = new System.Drawing.Size(100, 50);
+            this.btn_Del_Project.TabIndex = 8;
+            this.btn_Del_Project.Text = "Delete Project";
+            this.btn_Del_Project.UseVisualStyleBackColor = true;
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 661);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btn_Del_Project);
+            this.Controls.Add(this.btn_Add_Project);
+            this.Controls.Add(this.btn_Del_Event);
             this.Controls.Add(this.btn_Add_Event);
-            this.Controls.Add(this.panel1);
-            this.Controls.Add(this.listView1);
-            this.Controls.Add(this.dtp_Day);
+            this.Controls.Add(this.pnl_Date);
+            this.Controls.Add(this.lsv_Due_Dates);
             this.Controls.Add(this.trv_Daily_Events);
-            this.Controls.Add(this.monthCalendar1);
-            this.Controls.Add(this.menuStrip1);
-            this.MainMenuStrip = this.menuStrip1;
+            this.Controls.Add(this.mnc_Date);
+            this.Controls.Add(this.mnu_Main);
+            this.MainMenuStrip = this.mnu_Main;
             this.Name = "Form1";
             this.Text = "TO DO";
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
+            this.pnl_Date.ResumeLayout(false);
+            this.pnl_Date.PerformLayout();
+            this.mnu_Main.ResumeLayout(false);
+            this.mnu_Main.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -255,17 +270,15 @@
 
         #endregion
 
-        private System.Windows.Forms.MonthCalendar monthCalendar1;
+        private System.Windows.Forms.MonthCalendar mnc_Date;
         private System.Windows.Forms.TreeView trv_Daily_Events;
-        private System.Windows.Forms.DateTimePicker dtp_Day;
-        private System.Windows.Forms.ListView listView1;
+        private System.Windows.Forms.ListView lsv_Due_Dates;
         private System.Windows.Forms.ColumnHeader clm_Events;
         private System.Windows.Forms.ColumnHeader clm_Due_Date;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel pnl_Date;
         private System.Windows.Forms.TextBox txt_Date;
         private System.Windows.Forms.Button btn_Add_Event;
-        private System.Windows.Forms.Button button2;
-        private System.Windows.Forms.MenuStrip menuStrip1;
+        private System.Windows.Forms.MenuStrip mnu_Main;
         private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
@@ -277,6 +290,9 @@
         private System.Windows.Forms.ToolStripMenuItem projectsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem projectListToolStripMenuItem;
+        private System.Windows.Forms.Button btn_Del_Event;
+        private System.Windows.Forms.Button btn_Add_Project;
+        private System.Windows.Forms.Button btn_Del_Project;
     }
 }
 
