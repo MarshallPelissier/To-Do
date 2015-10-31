@@ -59,18 +59,37 @@ namespace To_Do_App
 
         private void newEventToolStripMenuItem_Click_1(object sender, EventArgs e)
         {
-            ShowEvents();
+            Show_Add_Event();
         }
 
         private void btn_Add_Event_Click(object sender, EventArgs e)
         {
-            ShowEvents();
+            Show_Add_Event();
         }
 
-        private void ShowEvents()
+        private void eventListToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            var newEvents = new Events();
-            newEvents.Show();
+            Show_Events();
+        }
+
+        private void Show_Events()
+        {
+            Form e = Application.OpenForms["Events"];
+            if (e == null)
+            {
+                var newEvents = new Events();
+                newEvents.Show();
+            }
+        }
+
+        private void Show_Add_Event()
+        {
+            Form ae = Application.OpenForms["Add_Event"];
+            if (ae == null)
+            {
+                var newEvent = new Add_Event();
+                newEvent.Show();
+            }
         }
 
     }

@@ -183,15 +183,16 @@
             // newEventToolStripMenuItem
             // 
             this.newEventToolStripMenuItem.Name = "newEventToolStripMenuItem";
-            this.newEventToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
+            this.newEventToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
             this.newEventToolStripMenuItem.Text = "New Event";
             this.newEventToolStripMenuItem.Click += new System.EventHandler(this.newEventToolStripMenuItem_Click_1);
             // 
             // eventListToolStripMenuItem
             // 
             this.eventListToolStripMenuItem.Name = "eventListToolStripMenuItem";
-            this.eventListToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
+            this.eventListToolStripMenuItem.Size = new System.Drawing.Size(152, 22);
             this.eventListToolStripMenuItem.Text = "Event List";
+            this.eventListToolStripMenuItem.Click += new System.EventHandler(this.eventListToolStripMenuItem_Click);
             // 
             // projectsToolStripMenuItem
             // 
