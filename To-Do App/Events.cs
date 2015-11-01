@@ -10,16 +10,11 @@ using System.Windows.Forms;
 
 namespace To_Do_App
 {
-    public partial class Events : Form
+    public partial class Events : BaseForm
     {
         public Events()
         {
             InitializeComponent();
-        }
-
-        private void rad_zero_CheckedChanged(object sender, EventArgs e)
-        {
-
         }
 
         private void Events_Load(object sender, EventArgs e)
@@ -38,17 +33,12 @@ namespace To_Do_App
 
         private void btn_Add_Event_Click(object sender, EventArgs e)
         {
-            Show_Add_Event();
+            Show_Add_Event(DateTime.Today);
         }
 
-        private void Show_Add_Event()
+        private void button3_Click(object sender, EventArgs e)
         {
-            Form ae = Application.OpenForms["Add_Event"];
-            if (ae == null)
-            {
-                var newEvent = new Add_Event();
-                newEvent.Show();
-            }
+            Show_Add_Project(DateTime.Today);
         }
     }
 }

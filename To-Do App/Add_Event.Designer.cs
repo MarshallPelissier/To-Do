@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.txt_Title = new System.Windows.Forms.TextBox();
+            this.txt_Event = new System.Windows.Forms.TextBox();
             this.pnl_Title = new System.Windows.Forms.Panel();
             this.textBox2 = new System.Windows.Forms.TextBox();
             this.dtp_Day = new System.Windows.Forms.DateTimePicker();
@@ -52,47 +52,34 @@
             this.trv_Projects = new System.Windows.Forms.TreeView();
             this.btn_Add_Event = new System.Windows.Forms.Button();
             this.btn_Del_Event = new System.Windows.Forms.Button();
-            this.btn_Clear_Project = new System.Windows.Forms.Button();
+            this.btn_Del_Project = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
-            this.mnu_Main = new System.Windows.Forms.MenuStrip();
-            this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.openToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.saveToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
-            this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eventsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.eventListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.projectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.projectListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pnl_Title.SuspendLayout();
             this.pnl_Completion.SuspendLayout();
             this.pnl_Deadline.SuspendLayout();
             this.pnl_Description.SuspendLayout();
             this.pnl_Projects.SuspendLayout();
-            this.mnu_Main.SuspendLayout();
             this.SuspendLayout();
             // 
-            // txt_Title
+            // txt_Event
             // 
-            this.txt_Title.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txt_Title.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txt_Title.Enabled = false;
-            this.txt_Title.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Title.Location = new System.Drawing.Point(75, 5);
-            this.txt_Title.Name = "txt_Title";
-            this.txt_Title.Size = new System.Drawing.Size(250, 39);
-            this.txt_Title.TabIndex = 0;
-            this.txt_Title.Text = "Title";
-            this.txt_Title.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_Event.BackColor = System.Drawing.SystemColors.ControlLight;
+            this.txt_Event.BorderStyle = System.Windows.Forms.BorderStyle.None;
+            this.txt_Event.Enabled = false;
+            this.txt_Event.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Event.Location = new System.Drawing.Point(75, 5);
+            this.txt_Event.Name = "txt_Event";
+            this.txt_Event.Size = new System.Drawing.Size(250, 39);
+            this.txt_Event.TabIndex = 0;
+            this.txt_Event.Text = "Event";
+            this.txt_Event.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // pnl_Title
             // 
             this.pnl_Title.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnl_Title.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.pnl_Title.Controls.Add(this.textBox2);
-            this.pnl_Title.Controls.Add(this.txt_Title);
+            this.pnl_Title.Controls.Add(this.txt_Event);
             this.pnl_Title.Location = new System.Drawing.Point(15, 45);
             this.pnl_Title.Name = "pnl_Title";
             this.pnl_Title.Size = new System.Drawing.Size(400, 100);
@@ -333,7 +320,7 @@
             // 
             // btn_Add_Event
             // 
-            this.btn_Add_Event.Location = new System.Drawing.Point(15, 595);
+            this.btn_Add_Event.Location = new System.Drawing.Point(30, 595);
             this.btn_Add_Event.Name = "btn_Add_Event";
             this.btn_Add_Event.Size = new System.Drawing.Size(100, 50);
             this.btn_Add_Event.TabIndex = 8;
@@ -342,21 +329,21 @@
             // 
             // btn_Del_Event
             // 
-            this.btn_Del_Event.Location = new System.Drawing.Point(140, 595);
+            this.btn_Del_Event.Location = new System.Drawing.Point(160, 595);
             this.btn_Del_Event.Name = "btn_Del_Event";
             this.btn_Del_Event.Size = new System.Drawing.Size(100, 50);
             this.btn_Del_Event.TabIndex = 12;
             this.btn_Del_Event.Text = "Delete Event";
             this.btn_Del_Event.UseVisualStyleBackColor = true;
             // 
-            // btn_Clear_Project
+            // btn_Del_Project
             // 
-            this.btn_Clear_Project.Location = new System.Drawing.Point(750, 595);
-            this.btn_Clear_Project.Name = "btn_Clear_Project";
-            this.btn_Clear_Project.Size = new System.Drawing.Size(100, 50);
-            this.btn_Clear_Project.TabIndex = 14;
-            this.btn_Clear_Project.Text = "Clear Project";
-            this.btn_Clear_Project.UseVisualStyleBackColor = true;
+            this.btn_Del_Project.Location = new System.Drawing.Point(750, 595);
+            this.btn_Del_Project.Name = "btn_Del_Project";
+            this.btn_Del_Project.Size = new System.Drawing.Size(100, 50);
+            this.btn_Del_Project.TabIndex = 14;
+            this.btn_Del_Project.Text = "Delete Project";
+            this.btn_Del_Project.UseVisualStyleBackColor = true;
             // 
             // button3
             // 
@@ -367,103 +354,12 @@
             this.button3.Text = "New Project";
             this.button3.UseVisualStyleBackColor = true;
             // 
-            // mnu_Main
-            // 
-            this.mnu_Main.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.mnu_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem,
-            this.eventsToolStripMenuItem,
-            this.projectsToolStripMenuItem});
-            this.mnu_Main.Location = new System.Drawing.Point(0, 0);
-            this.mnu_Main.Name = "mnu_Main";
-            this.mnu_Main.Size = new System.Drawing.Size(884, 24);
-            this.mnu_Main.TabIndex = 15;
-            this.mnu_Main.Text = "mnuMain";
-            this.mnu_Main.ItemClicked += new System.Windows.Forms.ToolStripItemClickedEventHandler(this.mnu_Main_ItemClicked);
-            // 
-            // fileToolStripMenuItem
-            // 
-            this.fileToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.openToolStripMenuItem,
-            this.saveToolStripMenuItem,
-            this.toolStripSeparator1,
-            this.exitToolStripMenuItem});
-            this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
-            this.fileToolStripMenuItem.Text = "File";
-            // 
-            // openToolStripMenuItem
-            // 
-            this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.openToolStripMenuItem.Text = "Open";
-            // 
-            // saveToolStripMenuItem
-            // 
-            this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.saveToolStripMenuItem.Text = "Save";
-            // 
-            // toolStripSeparator1
-            // 
-            this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(100, 6);
-            // 
-            // exitToolStripMenuItem
-            // 
-            this.exitToolStripMenuItem.Name = "exitToolStripMenuItem";
-            this.exitToolStripMenuItem.Size = new System.Drawing.Size(103, 22);
-            this.exitToolStripMenuItem.Text = "Exit";
-            // 
-            // eventsToolStripMenuItem
-            // 
-            this.eventsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newEventToolStripMenuItem,
-            this.eventListToolStripMenuItem});
-            this.eventsToolStripMenuItem.Name = "eventsToolStripMenuItem";
-            this.eventsToolStripMenuItem.Size = new System.Drawing.Size(53, 20);
-            this.eventsToolStripMenuItem.Text = "Events";
-            // 
-            // newEventToolStripMenuItem
-            // 
-            this.newEventToolStripMenuItem.Name = "newEventToolStripMenuItem";
-            this.newEventToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.newEventToolStripMenuItem.Text = "New Event";
-            // 
-            // eventListToolStripMenuItem
-            // 
-            this.eventListToolStripMenuItem.Name = "eventListToolStripMenuItem";
-            this.eventListToolStripMenuItem.Size = new System.Drawing.Size(130, 22);
-            this.eventListToolStripMenuItem.Text = "Event List";
-            // 
-            // projectsToolStripMenuItem
-            // 
-            this.projectsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newProjectToolStripMenuItem,
-            this.projectListToolStripMenuItem});
-            this.projectsToolStripMenuItem.Name = "projectsToolStripMenuItem";
-            this.projectsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.projectsToolStripMenuItem.Text = "Projects";
-            // 
-            // newProjectToolStripMenuItem
-            // 
-            this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.newProjectToolStripMenuItem.Text = "New Project";
-            // 
-            // projectListToolStripMenuItem
-            // 
-            this.projectListToolStripMenuItem.Name = "projectListToolStripMenuItem";
-            this.projectListToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.projectListToolStripMenuItem.Text = "Project List";
-            // 
             // Add_Event
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 661);
-            this.Controls.Add(this.mnu_Main);
-            this.Controls.Add(this.btn_Clear_Project);
+            this.ClientSize = new System.Drawing.Size(884, 662);
+            this.Controls.Add(this.btn_Del_Project);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.btn_Del_Event);
             this.Controls.Add(this.btn_Add_Event);
@@ -475,6 +371,15 @@
             this.Name = "Add_Event";
             this.Text = "Events";
             this.Load += new System.EventHandler(this.Events_Load);
+            this.Controls.SetChildIndex(this.pnl_Title, 0);
+            this.Controls.SetChildIndex(this.pnl_Completion, 0);
+            this.Controls.SetChildIndex(this.pnl_Deadline, 0);
+            this.Controls.SetChildIndex(this.pnl_Description, 0);
+            this.Controls.SetChildIndex(this.pnl_Projects, 0);
+            this.Controls.SetChildIndex(this.btn_Add_Event, 0);
+            this.Controls.SetChildIndex(this.btn_Del_Event, 0);
+            this.Controls.SetChildIndex(this.button3, 0);
+            this.Controls.SetChildIndex(this.btn_Del_Project, 0);
             this.pnl_Title.ResumeLayout(false);
             this.pnl_Title.PerformLayout();
             this.pnl_Completion.ResumeLayout(false);
@@ -485,8 +390,6 @@
             this.pnl_Description.PerformLayout();
             this.pnl_Projects.ResumeLayout(false);
             this.pnl_Projects.PerformLayout();
-            this.mnu_Main.ResumeLayout(false);
-            this.mnu_Main.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -494,7 +397,7 @@
 
         #endregion
 
-        private System.Windows.Forms.TextBox txt_Title;
+        private System.Windows.Forms.TextBox txt_Event;
         private System.Windows.Forms.Panel pnl_Title;
         private System.Windows.Forms.TextBox textBox2;
         private System.Windows.Forms.DateTimePicker dtp_Day;
@@ -518,19 +421,7 @@
         private System.Windows.Forms.DateTimePicker dateTimePicker1;
         private System.Windows.Forms.Button btn_Add_Event;
         private System.Windows.Forms.Button btn_Del_Event;
-        private System.Windows.Forms.Button btn_Clear_Project;
+        private System.Windows.Forms.Button btn_Del_Project;
         private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.MenuStrip mnu_Main;
-        private System.Windows.Forms.ToolStripMenuItem fileToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem openToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem saveToolStripMenuItem;
-        private System.Windows.Forms.ToolStripSeparator toolStripSeparator1;
-        private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eventsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newEventToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem eventListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem projectsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem projectListToolStripMenuItem;
     }
 }

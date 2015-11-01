@@ -10,7 +10,7 @@ using System.Windows.Forms;
 
 namespace To_Do_App
 {
-    public partial class Form1 : Form
+    public partial class Form1 : BaseForm
     {
         public Form1()
         {
@@ -31,13 +31,6 @@ namespace To_Do_App
         //dtp_Due_Date.CustomFormat = "MM/dd/yyyy - hh:00 tt";
 
         }
-        private void btn_Add_Node_Click(object sender, EventArgs e)
-        {
-            trv_Daily_Events.Nodes.Add("project1");
-            trv_Daily_Events.Nodes.Add("project2");
-            trv_Daily_Events.Nodes[0].Nodes.Add("sub");
-        }
-
 
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
@@ -45,51 +38,15 @@ namespace To_Do_App
             //dtp_Day.Value = mnc_Date.SelectionRange.Start;
         }
 
-        private void menuStrip1_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-        private void newEventToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            var newEvents = new Events();
-            newEvents.Show();
-
-        }
-
-        private void newEventToolStripMenuItem_Click_1(object sender, EventArgs e)
-        {
-            Show_Add_Event();
-        }
-
         private void btn_Add_Event_Click(object sender, EventArgs e)
         {
-            Show_Add_Event();
+
+            Show_Add_Event(mnc_Date.SelectionRange.Start());
         }
 
-        private void eventListToolStripMenuItem_Click(object sender, EventArgs e)
+        private void btn_Add_Project_Click(object sender, EventArgs e)
         {
-            Show_Events();
-        }
-
-        private void Show_Events()
-        {
-            Form e = Application.OpenForms["Events"];
-            if (e == null)
-            {
-                var newEvents = new Events();
-                newEvents.Show();
-            }
-        }
-
-        private void Show_Add_Event()
-        {
-            Form ae = Application.OpenForms["Add_Event"];
-            if (ae == null)
-            {
-                var newEvent = new Add_Event();
-                newEvent.Show();
-            }
+            //Show_Add_Project();
         }
 
     }

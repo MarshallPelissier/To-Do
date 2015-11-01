@@ -10,11 +10,17 @@ using System.Windows.Forms;
 
 namespace To_Do_App
 {
-    public partial class Add_Event : Form
+    public partial class Add_Event : BaseForm
     {
         public Add_Event()
         {
             InitializeComponent();
+        }
+
+        public Add_Event(DateTime day)
+        {
+            InitializeComponent();
+            dtp_Day.Value = day;
         }
 
         private void rad_zero_CheckedChanged(object sender, EventArgs e)
@@ -65,5 +71,8 @@ namespace To_Do_App
         {
 
         }
+
+        private DateTime Day;
+        //private Project Selected_Project;
     }
 }
