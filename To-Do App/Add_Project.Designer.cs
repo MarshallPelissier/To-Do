@@ -93,7 +93,7 @@
             // 
             // btn_Delete_Project
             // 
-            this.btn_Delete_Project.Location = new System.Drawing.Point(140, 595);
+            this.btn_Delete_Project.Location = new System.Drawing.Point(160, 595);
             this.btn_Delete_Project.Name = "btn_Delete_Project";
             this.btn_Delete_Project.Size = new System.Drawing.Size(100, 50);
             this.btn_Delete_Project.TabIndex = 23;
@@ -102,16 +102,17 @@
             // 
             // btn_Save_Project
             // 
-            this.btn_Save_Project.Location = new System.Drawing.Point(15, 595);
+            this.btn_Save_Project.Location = new System.Drawing.Point(30, 595);
             this.btn_Save_Project.Name = "btn_Save_Project";
             this.btn_Save_Project.Size = new System.Drawing.Size(100, 50);
             this.btn_Save_Project.TabIndex = 22;
             this.btn_Save_Project.Text = "Save Project";
             this.btn_Save_Project.UseVisualStyleBackColor = true;
+            this.btn_Save_Project.Click += new System.EventHandler(this.btn_Save_Project_Click);
             // 
             // btn_Del_Event
             // 
-            this.btn_Del_Event.Location = new System.Drawing.Point(770, 595);
+            this.btn_Del_Event.Location = new System.Drawing.Point(750, 595);
             this.btn_Del_Event.Name = "btn_Del_Event";
             this.btn_Del_Event.Size = new System.Drawing.Size(100, 50);
             this.btn_Del_Event.TabIndex = 21;
@@ -120,12 +121,13 @@
             // 
             // btn_Add_Event
             // 
-            this.btn_Add_Event.Location = new System.Drawing.Point(645, 595);
+            this.btn_Add_Event.Location = new System.Drawing.Point(620, 595);
             this.btn_Add_Event.Name = "btn_Add_Event";
             this.btn_Add_Event.Size = new System.Drawing.Size(100, 50);
             this.btn_Add_Event.TabIndex = 19;
             this.btn_Add_Event.Text = "New Event";
             this.btn_Add_Event.UseVisualStyleBackColor = true;
+            this.btn_Add_Event.Click += new System.EventHandler(this.btn_Add_Event_Click);
             // 
             // pnl_Events
             // 
@@ -299,7 +301,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 662);
+            this.ClientSize = new System.Drawing.Size(884, 661);
             this.Controls.Add(this.pnl_Title);
             this.Controls.Add(this.btn_Del_Event);
             this.Controls.Add(this.btn_Add_Event);

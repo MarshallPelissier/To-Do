@@ -17,10 +17,14 @@ namespace To_Do_App
             InitializeComponent();
         }
 
-        public Add_Event(DateTime day)
+        public Add_Event(DateTime day,bool new_event)
         {
             InitializeComponent();
             dtp_Day.Value = day;
+            dtp_Complete_Date.Value = day;
+            Day = day;
+            New_Event = new_event;
+            Write_List(lsv_Projects);
         }
 
         private void rad_zero_CheckedChanged(object sender, EventArgs e)
@@ -72,7 +76,60 @@ namespace To_Do_App
 
         }
 
-        private DateTime Day;
+
+        private void button3_Click(object sender, EventArgs e)
+        {
+            Show_Add_Project(DateTime.Today,true);
+        }
+
+        private void btn_Save_Event_Click(object sender, EventArgs e)
+        {
+            if (txt_Title.Text != "")
+            {
+                Project project = null;
+                int pint;
+                if (lsv_Projects.SelectedItems.Count != 0)
+                {
+                    pint = lsv_Projects.SelectedItems.IndexOf(lsv_Projects.SelectedItems[0]);
+                    project = file.All_Projects[pint];
+                }
+
+                Event ev = new Event(Day, dtp_Complete_Date.Value, dtp_Day.Value, txt_Title.Text, rtb_Description.Text, Completion, project);
+                Save_Event(ev);
+            }
+
+            this.Close();
+        }
+
+        private void chk_Deadline_CheckedChanged(object sender, EventArgs e)
+        {
+            if (chk_Deadline.Checked == true)
+            {
+                due_date = true;
+            }
+            else
+            {
+                due_date = false;
+            }
+        }
+
+        public void Write_List(ListView List_View)
+        {            
+            foreach (Project p in file.All_Projects)
+            {
+                ListViewItem item = new ListViewItem();
+                item.Text = p.Title;
+                item.Name = "lsi_" + p.Title;
+                item.SubItems.Add(p.Completed.ToString());
+                List_View.Items.Add(item);
+            }          
+        }
         //private Project Selected_Project;
+        private DateTime Day;
+        float Completion;
+        bool New_Event = true;
+        bool due_date;
+        bool complete_date;
+        
     }
 }

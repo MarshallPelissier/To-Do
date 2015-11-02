@@ -79,6 +79,7 @@
             // clm_Due_Date
             // 
             this.clm_Due_Date.Text = "Due Date";
+            this.clm_Due_Date.Width = 126;
             // 
             // pnl_Date
             // 
@@ -142,7 +143,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 662);
+            this.ClientSize = new System.Drawing.Size(884, 661);
             this.Controls.Add(this.btn_Del_Project);
             this.Controls.Add(this.btn_Del_Event);
             this.Controls.Add(this.btn_Add_Event);
@@ -153,6 +154,7 @@
             this.Controls.Add(this.btn_Add_Project);
             this.Name = "Form1";
             this.Text = "TO DO";
+            this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.Controls.SetChildIndex(this.btn_Add_Project, 0);
             this.Controls.SetChildIndex(this.mnc_Date, 0);

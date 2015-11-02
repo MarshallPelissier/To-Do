@@ -30,10 +30,10 @@
         {
             this.txt_Event = new System.Windows.Forms.TextBox();
             this.pnl_Title = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_Title = new System.Windows.Forms.TextBox();
             this.dtp_Day = new System.Windows.Forms.DateTimePicker();
             this.pnl_Completion = new System.Windows.Forms.Panel();
-            this.dateTimePicker1 = new System.Windows.Forms.DateTimePicker();
+            this.dtp_Complete_Date = new System.Windows.Forms.DateTimePicker();
             this.rad_done = new System.Windows.Forms.RadioButton();
             this.rad_3_4ths = new System.Windows.Forms.RadioButton();
             this.rad_half = new System.Windows.Forms.RadioButton();
@@ -41,16 +41,16 @@
             this.rad_zero = new System.Windows.Forms.RadioButton();
             this.txt_Completion = new System.Windows.Forms.TextBox();
             this.pnl_Deadline = new System.Windows.Forms.Panel();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.chk_Deadline = new System.Windows.Forms.CheckBox();
             this.txt_Deadline = new System.Windows.Forms.TextBox();
             this.rtb_Description = new System.Windows.Forms.RichTextBox();
             this.pnl_Description = new System.Windows.Forms.Panel();
             this.txt_Description = new System.Windows.Forms.TextBox();
             this.pnl_Projects = new System.Windows.Forms.Panel();
-            this.txt_Projects = new System.Windows.Forms.TextBox();
-            this.trv_Projects = new System.Windows.Forms.TreeView();
-            this.btn_Add_Event = new System.Windows.Forms.Button();
+            this.lsv_Projects = new System.Windows.Forms.ListView();
+            this.clh_Projects = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.clh_Completion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
+            this.btn_Save_Event = new System.Windows.Forms.Button();
             this.btn_Del_Event = new System.Windows.Forms.Button();
             this.btn_Del_Project = new System.Windows.Forms.Button();
             this.button3 = new System.Windows.Forms.Button();
@@ -78,21 +78,21 @@
             // 
             this.pnl_Title.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnl_Title.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_Title.Controls.Add(this.textBox2);
+            this.pnl_Title.Controls.Add(this.txt_Title);
             this.pnl_Title.Controls.Add(this.txt_Event);
             this.pnl_Title.Location = new System.Drawing.Point(15, 45);
             this.pnl_Title.Name = "pnl_Title";
             this.pnl_Title.Size = new System.Drawing.Size(400, 100);
             this.pnl_Title.TabIndex = 2;
             // 
-            // textBox2
+            // txt_Title
             // 
-            this.textBox2.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(50, 50);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(300, 33);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_Title.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Title.Location = new System.Drawing.Point(50, 50);
+            this.txt_Title.Name = "txt_Title";
+            this.txt_Title.Size = new System.Drawing.Size(300, 33);
+            this.txt_Title.TabIndex = 1;
+            this.txt_Title.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // dtp_Day
             // 
@@ -106,7 +106,7 @@
             // 
             this.pnl_Completion.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnl_Completion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_Completion.Controls.Add(this.dateTimePicker1);
+            this.pnl_Completion.Controls.Add(this.dtp_Complete_Date);
             this.pnl_Completion.Controls.Add(this.rad_done);
             this.pnl_Completion.Controls.Add(this.rad_3_4ths);
             this.pnl_Completion.Controls.Add(this.rad_half);
@@ -118,12 +118,12 @@
             this.pnl_Completion.Size = new System.Drawing.Size(400, 100);
             this.pnl_Completion.TabIndex = 3;
             // 
-            // dateTimePicker1
+            // dtp_Complete_Date
             // 
-            this.dateTimePicker1.Location = new System.Drawing.Point(155, 60);
-            this.dateTimePicker1.Name = "dateTimePicker1";
-            this.dateTimePicker1.Size = new System.Drawing.Size(227, 20);
-            this.dateTimePicker1.TabIndex = 11;
+            this.dtp_Complete_Date.Location = new System.Drawing.Point(155, 60);
+            this.dtp_Complete_Date.Name = "dtp_Complete_Date";
+            this.dtp_Complete_Date.Size = new System.Drawing.Size(227, 20);
+            this.dtp_Complete_Date.TabIndex = 11;
             // 
             // rad_done
             // 
@@ -205,8 +205,7 @@
             // 
             this.pnl_Deadline.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnl_Deadline.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_Deadline.Controls.Add(this.radioButton4);
-            this.pnl_Deadline.Controls.Add(this.radioButton5);
+            this.pnl_Deadline.Controls.Add(this.chk_Deadline);
             this.pnl_Deadline.Controls.Add(this.dtp_Day);
             this.pnl_Deadline.Controls.Add(this.txt_Deadline);
             this.pnl_Deadline.Location = new System.Drawing.Point(600, 175);
@@ -214,33 +213,14 @@
             this.pnl_Deadline.Size = new System.Drawing.Size(270, 100);
             this.pnl_Deadline.TabIndex = 6;
             // 
-            // radioButton4
+            // chk_Deadline
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.radioButton4.Location = new System.Drawing.Point(224, 14);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(25, 30);
-            this.radioButton4.TabIndex = 2;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "No";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            this.radioButton4.CheckedChanged += new System.EventHandler(this.radioButton4_CheckedChanged);
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.radioButton5.Location = new System.Drawing.Point(165, 14);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(29, 30);
-            this.radioButton5.TabIndex = 1;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Yes";
-            this.radioButton5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.radioButton5.UseVisualStyleBackColor = true;
-            this.radioButton5.CheckedChanged += new System.EventHandler(this.radioButton5_CheckedChanged);
+            this.chk_Deadline.Location = new System.Drawing.Point(144, 25);
+            this.chk_Deadline.Name = "chk_Deadline";
+            this.chk_Deadline.Size = new System.Drawing.Size(80, 17);
+            this.chk_Deadline.TabIndex = 0;
+            this.chk_Deadline.UseVisualStyleBackColor = true;
+            this.chk_Deadline.CheckedChanged += new System.EventHandler(this.chk_Deadline_CheckedChanged);
             // 
             // txt_Deadline
             // 
@@ -291,41 +271,44 @@
             // 
             this.pnl_Projects.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnl_Projects.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_Projects.Controls.Add(this.txt_Projects);
-            this.pnl_Projects.Controls.Add(this.trv_Projects);
+            this.pnl_Projects.Controls.Add(this.lsv_Projects);
             this.pnl_Projects.Location = new System.Drawing.Point(600, 295);
             this.pnl_Projects.Name = "pnl_Projects";
             this.pnl_Projects.Size = new System.Drawing.Size(270, 285);
             this.pnl_Projects.TabIndex = 11;
             // 
-            // txt_Projects
+            // lsv_Projects
             // 
-            this.txt_Projects.BackColor = System.Drawing.SystemColors.ControlLight;
-            this.txt_Projects.BorderStyle = System.Windows.Forms.BorderStyle.None;
-            this.txt_Projects.Enabled = false;
-            this.txt_Projects.Font = new System.Drawing.Font("Tahoma", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Projects.Location = new System.Drawing.Point(20, 15);
-            this.txt_Projects.Name = "txt_Projects";
-            this.txt_Projects.Size = new System.Drawing.Size(200, 29);
-            this.txt_Projects.TabIndex = 1;
-            this.txt_Projects.Text = "Projects";
-            this.txt_Projects.TextChanged += new System.EventHandler(this.textBox3_TextChanged);
+            this.lsv_Projects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
+            this.clh_Projects,
+            this.clh_Completion});
+            this.lsv_Projects.Location = new System.Drawing.Point(20, 20);
+            this.lsv_Projects.MultiSelect = false;
+            this.lsv_Projects.Name = "lsv_Projects";
+            this.lsv_Projects.Size = new System.Drawing.Size(230, 245);
+            this.lsv_Projects.TabIndex = 3;
+            this.lsv_Projects.UseCompatibleStateImageBehavior = false;
+            this.lsv_Projects.View = System.Windows.Forms.View.Details;
             // 
-            // trv_Projects
+            // clh_Projects
             // 
-            this.trv_Projects.Location = new System.Drawing.Point(20, 55);
-            this.trv_Projects.Name = "trv_Projects";
-            this.trv_Projects.Size = new System.Drawing.Size(230, 210);
-            this.trv_Projects.TabIndex = 0;
+            this.clh_Projects.Text = "Projects";
+            this.clh_Projects.Width = 138;
             // 
-            // btn_Add_Event
+            // clh_Completion
             // 
-            this.btn_Add_Event.Location = new System.Drawing.Point(30, 595);
-            this.btn_Add_Event.Name = "btn_Add_Event";
-            this.btn_Add_Event.Size = new System.Drawing.Size(100, 50);
-            this.btn_Add_Event.TabIndex = 8;
-            this.btn_Add_Event.Text = "New Event";
-            this.btn_Add_Event.UseVisualStyleBackColor = true;
+            this.clh_Completion.Text = "Completion";
+            this.clh_Completion.Width = 66;
+            // 
+            // btn_Save_Event
+            // 
+            this.btn_Save_Event.Location = new System.Drawing.Point(30, 595);
+            this.btn_Save_Event.Name = "btn_Save_Event";
+            this.btn_Save_Event.Size = new System.Drawing.Size(100, 50);
+            this.btn_Save_Event.TabIndex = 8;
+            this.btn_Save_Event.Text = "Save Event";
+            this.btn_Save_Event.UseVisualStyleBackColor = true;
+            this.btn_Save_Event.Click += new System.EventHandler(this.btn_Save_Event_Click);
             // 
             // btn_Del_Event
             // 
@@ -353,16 +336,17 @@
             this.button3.TabIndex = 13;
             this.button3.Text = "New Project";
             this.button3.UseVisualStyleBackColor = true;
+            this.button3.Click += new System.EventHandler(this.button3_Click);
             // 
             // Add_Event
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(884, 662);
+            this.ClientSize = new System.Drawing.Size(884, 661);
             this.Controls.Add(this.btn_Del_Project);
             this.Controls.Add(this.button3);
             this.Controls.Add(this.btn_Del_Event);
-            this.Controls.Add(this.btn_Add_Event);
+            this.Controls.Add(this.btn_Save_Event);
             this.Controls.Add(this.pnl_Projects);
             this.Controls.Add(this.pnl_Description);
             this.Controls.Add(this.pnl_Deadline);
@@ -376,7 +360,7 @@
             this.Controls.SetChildIndex(this.pnl_Deadline, 0);
             this.Controls.SetChildIndex(this.pnl_Description, 0);
             this.Controls.SetChildIndex(this.pnl_Projects, 0);
-            this.Controls.SetChildIndex(this.btn_Add_Event, 0);
+            this.Controls.SetChildIndex(this.btn_Save_Event, 0);
             this.Controls.SetChildIndex(this.btn_Del_Event, 0);
             this.Controls.SetChildIndex(this.button3, 0);
             this.Controls.SetChildIndex(this.btn_Del_Project, 0);
@@ -389,7 +373,6 @@
             this.pnl_Description.ResumeLayout(false);
             this.pnl_Description.PerformLayout();
             this.pnl_Projects.ResumeLayout(false);
-            this.pnl_Projects.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -399,7 +382,7 @@
 
         private System.Windows.Forms.TextBox txt_Event;
         private System.Windows.Forms.Panel pnl_Title;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_Title;
         private System.Windows.Forms.DateTimePicker dtp_Day;
         private System.Windows.Forms.Panel pnl_Completion;
         private System.Windows.Forms.TextBox txt_Completion;
@@ -409,19 +392,19 @@
         private System.Windows.Forms.RadioButton rad_half;
         private System.Windows.Forms.RadioButton rad_4th;
         private System.Windows.Forms.Panel pnl_Deadline;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.TextBox txt_Deadline;
         private System.Windows.Forms.RichTextBox rtb_Description;
         private System.Windows.Forms.Panel pnl_Description;
         private System.Windows.Forms.TextBox txt_Description;
         private System.Windows.Forms.Panel pnl_Projects;
-        private System.Windows.Forms.TextBox txt_Projects;
-        private System.Windows.Forms.TreeView trv_Projects;
-        private System.Windows.Forms.DateTimePicker dateTimePicker1;
-        private System.Windows.Forms.Button btn_Add_Event;
+        private System.Windows.Forms.DateTimePicker dtp_Complete_Date;
+        private System.Windows.Forms.Button btn_Save_Event;
         private System.Windows.Forms.Button btn_Del_Event;
         private System.Windows.Forms.Button btn_Del_Project;
         private System.Windows.Forms.Button button3;
+        private System.Windows.Forms.ListView lsv_Projects;
+        private System.Windows.Forms.ColumnHeader clh_Projects;
+        private System.Windows.Forms.ColumnHeader clh_Completion;
+        private System.Windows.Forms.CheckBox chk_Deadline;
     }
 }
