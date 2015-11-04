@@ -8,15 +8,15 @@ namespace To_Do_App
 {
     public class Project
     {
-        public Project(DateTime created, DateTime completed, DateTime due,string title, string description,bool done,bool due_date)
+        public Project(bool done, bool due_date, DateTime created, DateTime completed, DateTime due,string title, string description)
         {
+            Done = done;
+            Due_Date = due_date;
             Created = created;
             Completed = completed;
             Due = due;
             Title = title;
             Description = description;
-            Done = done;
-            Due_Date = due_date;
         }
 
         public void Add_Events(Event events)
@@ -29,8 +29,8 @@ namespace To_Do_App
             All_Events.Remove(events);
         }
 
-        public bool Due_Date { get; set; }
         public bool Done { get; set; }
+        public bool Due_Date { get; set; }
         public DateTime Created { get; set; }
         public DateTime Completed { get; set; }
         public DateTime Due { get; set; }

@@ -32,10 +32,23 @@ namespace To_Do_App
             }
         }
 
-        public void Show_Add_Event(DateTime day,bool new_event)
+        public void Show_Add_Event(DateTime day)
         {
             Form ae = Application.OpenForms["Add_Event"];
-            var new_Add_Event = new Add_Event(day,new_event);
+            var new_Add_Event = new Add_Event(day);
+            if (ae == null)
+            {
+                new_Add_Event.Show();
+            }
+            else
+            {
+                ae.Activate();
+            }
+        }
+        public void Show_Edit_Event(Event new_event)
+        {
+            Form ae = Application.OpenForms["Add_Event"];
+            var new_Add_Event = new Add_Event(new_event);
             if (ae == null)
             {
                 new_Add_Event.Show();
@@ -60,10 +73,24 @@ namespace To_Do_App
 
         }
 
-        public void Show_Add_Project(DateTime day,bool new_project)
+        public void Show_Add_Project(DateTime day)
         {
             Form ap = Application.OpenForms["Add_Project"];
-            var new_Add_Project = new Add_Project(day,new_project);
+            var new_Add_Project = new Add_Project(day);
+            if (ap == null)
+            {
+                new_Add_Project.Show();
+            }
+            else
+            {
+                ap.Activate();
+            }
+        }
+
+        public void Show_Add_Project(Project new_project)
+        {
+            Form ap = Application.OpenForms["Add_Project"];
+            var new_Add_Project = new Add_Project(new_project);
             if (ap == null)
             {
                 new_Add_Project.Show();
@@ -76,7 +103,7 @@ namespace To_Do_App
 
         private void newEventToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Show_Add_Event(DateTime.Today,true);
+            Show_Add_Event(DateTime.Today);
         }
 
         private void eventListToolStripMenuItem_Click(object sender, EventArgs e)
@@ -86,7 +113,7 @@ namespace To_Do_App
 
         private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Show_Add_Project(DateTime.Today,true);
+            Show_Add_Project(DateTime.Today);
         }
 
         private void projectListToolStripMenuItem_Click(object sender, EventArgs e)
@@ -103,6 +130,14 @@ namespace To_Do_App
             else
             {
                 new_event.Assigned_Project.All_Events.Add(new_event);
+                int i = 0;
+                float j = 0;
+                foreach (Event e in new_event.Assigned_Project.All_Events)
+                {
+                    j += e.Completion;
+                    i++;
+                }
+                new_event.Assigned_Project.Completion = (j / i);
             }
         }
 
@@ -118,13 +153,54 @@ namespace To_Do_App
             foreach (Project p in file.All_Projects)
             {
                 TreeNode nod = new TreeNode();
+                if (p.Done == true)
+                {
+                    nod.BackColor = Color.LightGray;
+                }
+                else if (p.Due_Date)
+                {
+                    nod.BackColor = Color.LightCoral;
+                }
+                else if (p.Completion != 0)
+                {
+                    nod.BackColor = Color.LightBlue;
+                }
+                else 
+                { 
+                    nod.BackColor = Color.LightGreen;
+                }
                 nod.Text = p.Title;
                 nod.Name = "trn_" + p.Title;
-                Tree_View.Nodes.Add(nod);
-                foreach (Event e in file.Loose_Events)
+                nod.Tag = p.Title;
+                int j = nod.Text.Length/3 + 1;
+                for (int i = 0; i < (j); i++)
                 {
+                    nod.Text += " ";
+                }
+                Tree_View.Nodes.Add(nod);
+                Tree_View.SelectedNode = nod;
+                Tree_View.SelectedNode.NodeFont = new Font(Tree_View.Font, FontStyle.Bold);
+                foreach (Event e in p.All_Events)
+                {                  
                     TreeNode node = new TreeNode();
+                    if (e.Done == true)
+                    {
+                        node.BackColor = Color.LightGray;
+                    }
+                    else if (e.Due_Date)
+                    {
+                        node.BackColor = Color.LightCoral;
+                    }
+                    else if (e.Completion != 0)
+                    {
+                        node.BackColor = Color.LightBlue;
+                    }
+                    else
+                    {
+                        node.BackColor = Color.LightGreen;
+                    }
                     node.Text = e.Title;
+                    node.Tag = e.Title;
                     node.Name = "trn_" + e.Title;
                     Tree_View.SelectedNode.Nodes.Add(node);
                 }
@@ -132,10 +208,29 @@ namespace To_Do_App
             foreach (Event e in file.Loose_Events)
             {
                 TreeNode node = new TreeNode();
+                if (e.Done == true)
+                {
+                    node.BackColor = Color.LightGray;
+                }
+                else if (e.Due_Date)
+                {
+                    node.BackColor = Color.LightCoral;
+                }
+                else if (e.Completion != 0)
+                {
+                    node.BackColor = Color.LightBlue;
+                }
+                else
+                {
+                    node.BackColor = Color.LightGreen;
+                }
                 node.Text = e.Title;
+                node.Tag = e.Title;
                 node.Name = "trn_" + e.Title;
                 Tree_View.Nodes.Add(node);
+                Tree_View.SelectedNode = node;
             }
+            Tree_View.ExpandAll();
             
         }
         /*

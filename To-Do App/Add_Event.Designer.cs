@@ -47,6 +47,8 @@
             this.pnl_Description = new System.Windows.Forms.Panel();
             this.txt_Description = new System.Windows.Forms.TextBox();
             this.pnl_Projects = new System.Windows.Forms.Panel();
+            this.chk_Project = new System.Windows.Forms.CheckBox();
+            this.txt_Project = new System.Windows.Forms.TextBox();
             this.lsv_Projects = new System.Windows.Forms.ListView();
             this.clh_Projects = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.clh_Completion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
@@ -96,6 +98,7 @@
             // 
             // dtp_Day
             // 
+            this.dtp_Day.Enabled = false;
             this.dtp_Day.Location = new System.Drawing.Point(24, 62);
             this.dtp_Day.Name = "dtp_Day";
             this.dtp_Day.Size = new System.Drawing.Size(227, 20);
@@ -120,6 +123,7 @@
             // 
             // dtp_Complete_Date
             // 
+            this.dtp_Complete_Date.Enabled = false;
             this.dtp_Complete_Date.Location = new System.Drawing.Point(155, 60);
             this.dtp_Complete_Date.Name = "dtp_Complete_Date";
             this.dtp_Complete_Date.Size = new System.Drawing.Size(227, 20);
@@ -136,6 +140,7 @@
             this.rad_done.TabStop = true;
             this.rad_done.Text = "100%";
             this.rad_done.UseVisualStyleBackColor = true;
+            this.rad_done.CheckedChanged += new System.EventHandler(this.rad_done_CheckedChanged);
             // 
             // rad_3_4ths
             // 
@@ -148,6 +153,7 @@
             this.rad_3_4ths.TabStop = true;
             this.rad_3_4ths.Text = "75%";
             this.rad_3_4ths.UseVisualStyleBackColor = true;
+            this.rad_3_4ths.CheckedChanged += new System.EventHandler(this.rad_3_4ths_CheckedChanged);
             // 
             // rad_half
             // 
@@ -160,6 +166,7 @@
             this.rad_half.TabStop = true;
             this.rad_half.Text = "50%";
             this.rad_half.UseVisualStyleBackColor = true;
+            this.rad_half.CheckedChanged += new System.EventHandler(this.rad_half_CheckedChanged);
             // 
             // rad_4th
             // 
@@ -172,6 +179,7 @@
             this.rad_4th.TabStop = true;
             this.rad_4th.Text = "25%";
             this.rad_4th.UseVisualStyleBackColor = true;
+            this.rad_4th.CheckedChanged += new System.EventHandler(this.rad_4th_CheckedChanged);
             // 
             // rad_zero
             // 
@@ -271,24 +279,45 @@
             // 
             this.pnl_Projects.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnl_Projects.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Projects.Controls.Add(this.chk_Project);
+            this.pnl_Projects.Controls.Add(this.txt_Project);
             this.pnl_Projects.Controls.Add(this.lsv_Projects);
             this.pnl_Projects.Location = new System.Drawing.Point(600, 295);
             this.pnl_Projects.Name = "pnl_Projects";
             this.pnl_Projects.Size = new System.Drawing.Size(270, 285);
             this.pnl_Projects.TabIndex = 11;
             // 
+            // chk_Project
+            // 
+            this.chk_Project.Location = new System.Drawing.Point(234, 17);
+            this.chk_Project.Name = "chk_Project";
+            this.chk_Project.Size = new System.Drawing.Size(80, 17);
+            this.chk_Project.TabIndex = 11;
+            this.chk_Project.UseVisualStyleBackColor = true;
+            // 
+            // txt_Project
+            // 
+            this.txt_Project.Enabled = false;
+            this.txt_Project.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Project.Location = new System.Drawing.Point(20, 15);
+            this.txt_Project.Name = "txt_Project";
+            this.txt_Project.Size = new System.Drawing.Size(208, 20);
+            this.txt_Project.TabIndex = 2;
+            this.txt_Project.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            // 
             // lsv_Projects
             // 
             this.lsv_Projects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
             this.clh_Projects,
             this.clh_Completion});
-            this.lsv_Projects.Location = new System.Drawing.Point(20, 20);
+            this.lsv_Projects.Location = new System.Drawing.Point(20, 42);
             this.lsv_Projects.MultiSelect = false;
             this.lsv_Projects.Name = "lsv_Projects";
-            this.lsv_Projects.Size = new System.Drawing.Size(230, 245);
+            this.lsv_Projects.Size = new System.Drawing.Size(230, 223);
             this.lsv_Projects.TabIndex = 3;
             this.lsv_Projects.UseCompatibleStateImageBehavior = false;
             this.lsv_Projects.View = System.Windows.Forms.View.Details;
+            this.lsv_Projects.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lsv_Projects_ItemSelectionChanged);
             // 
             // clh_Projects
             // 
@@ -353,7 +382,7 @@
             this.Controls.Add(this.pnl_Completion);
             this.Controls.Add(this.pnl_Title);
             this.Name = "Add_Event";
-            this.Text = "Events";
+            this.Text = "Edit Event";
             this.Load += new System.EventHandler(this.Events_Load);
             this.Controls.SetChildIndex(this.pnl_Title, 0);
             this.Controls.SetChildIndex(this.pnl_Completion, 0);
@@ -373,6 +402,7 @@
             this.pnl_Description.ResumeLayout(false);
             this.pnl_Description.PerformLayout();
             this.pnl_Projects.ResumeLayout(false);
+            this.pnl_Projects.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -406,5 +436,7 @@
         private System.Windows.Forms.ColumnHeader clh_Projects;
         private System.Windows.Forms.ColumnHeader clh_Completion;
         private System.Windows.Forms.CheckBox chk_Deadline;
+        private System.Windows.Forms.CheckBox chk_Project;
+        private System.Windows.Forms.TextBox txt_Project;
     }
 }

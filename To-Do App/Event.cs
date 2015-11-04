@@ -8,8 +8,10 @@ namespace To_Do_App
 {
     public class Event
     {
-        public Event(DateTime created, DateTime completed, DateTime due, string title, string description, float completion, Project assigned_project)
+        public Event(bool done, bool due_date, DateTime created, DateTime completed, DateTime due, string title, string description, float completion, Project assigned_project)
         {
+            Done = done;
+            Due_Date = due_date;
             Created = created;
             Completed = completed;
             Due = due;
@@ -19,6 +21,8 @@ namespace To_Do_App
             Assigned_Project = assigned_project;
         }
 
+        public bool Done { get; set; }
+        public bool Due_Date { get; set; }
         public DateTime Created { get; set; }
         public DateTime Completed { get; set; }
         public DateTime Due { get; set; }

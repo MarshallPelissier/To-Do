@@ -12,20 +12,7 @@ namespace To_Do_App
         {
 
         }
-
-        public void Open()
-        {
-            //opens file
-
-        }
-
-        public void Save()
-        {
-            //saves file
-
-        }
-
-                
+               
         public List<Project> All_Projects = new List<Project>();
         public List<Event> Loose_Events = new List<Event>();
         

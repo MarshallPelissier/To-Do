@@ -15,23 +15,80 @@ namespace To_Do_App
         public Add_Event()
         {
             InitializeComponent();
+            this.StartPosition = FormStartPosition.CenterParent;
         }
 
-        public Add_Event(DateTime day,bool new_event)
+        public Add_Event(DateTime day)
         {
             InitializeComponent();
             dtp_Day.Value = day;
             dtp_Complete_Date.Value = day;
             Day = day;
-            New_Event = new_event;
             Write_List(lsv_Projects);
+        }
+        public Add_Event(Event new_event)
+        {
+            InitializeComponent();
+            done = new_event.Done;
+            due_date = new_event.Due_Date;
+            Day = new_event.Created;
+            dtp_Complete_Date.Value = new_event.Completed;
+            dtp_Day.Value = new_event.Due;
+            txt_Title.Text = new_event.Title;
+            rtb_Description.Text = new_event.Description;
+            Write_List(lsv_Projects);
+            edit_event = new_event;
+            if (new_event.Assigned_Project != null)
+            {
+                foreach (ListViewItem p in lsv_Projects.Items)
+                {
+                    if (p.Text == new_event.Assigned_Project.Title)
+                    {
+                        lsv_Projects.Items[p.Index].Focused = true;
+                        lsv_Projects.Items[p.Index].Selected = true;
+                    }
+                }
+            }
         }
 
         private void rad_zero_CheckedChanged(object sender, EventArgs e)
         {
+            done = false;
+            dtp_Complete_Date.Enabled = false;
+            Completion = 0;
+        }
+        private void rad_4th_CheckedChanged(object sender, EventArgs e)
+        {
 
+            done = false;
+            dtp_Complete_Date.Enabled = false;
+            Completion = 0.25f;
         }
 
+        private void rad_half_CheckedChanged(object sender, EventArgs e)
+        {
+
+            done = false;
+            dtp_Complete_Date.Enabled = false;
+            Completion = 0.50f;
+        }
+
+        private void rad_3_4ths_CheckedChanged(object sender, EventArgs e)
+        {
+
+            done = false;
+            dtp_Complete_Date.Enabled = false;
+            Completion = 0.75f;
+        }
+
+        private void rad_done_CheckedChanged(object sender, EventArgs e)
+        {
+
+            done = true;
+            dtp_Complete_Date.Enabled = true;
+            Completion = 1;
+        }
+        
         private void Events_Load(object sender, EventArgs e)
         {
             CustomFormat();
@@ -51,64 +108,95 @@ namespace To_Do_App
 
         }
 
-        private void radioButton5_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
         private void dtp_Day_ValueChanged(object sender, EventArgs e)
         {
 
         }
 
-        private void radioButton4_CheckedChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void mnu_Main_ItemClicked(object sender, ToolStripItemClickedEventArgs e)
-        {
-
-        }
-
-
         private void button3_Click(object sender, EventArgs e)
         {
-            Show_Add_Project(DateTime.Today,true);
+            Show_Add_Project(DateTime.Today);
         }
 
         private void btn_Save_Event_Click(object sender, EventArgs e)
         {
-            if (txt_Title.Text != "")
+            if (txt_Title.Text == "")
             {
-                Project project = null;
-                int pint;
-                if (lsv_Projects.SelectedItems.Count != 0)
+                MessageBox.Show("Event Title is blank","Title ERROR");
+                return;
+            }
+            Project project = null;
+            string pname;
+            if (lsv_Projects.SelectedItems.Count != 0 && chk_Project.Checked)
+            {
+                pname = lsv_Projects.SelectedItems[0].Text;
+                foreach (Project p in file.All_Projects)
                 {
-                    pint = lsv_Projects.SelectedItems.IndexOf(lsv_Projects.SelectedItems[0]);
-                    project = file.All_Projects[pint];
+                    if (p.Title == pname)
+                    {
+                        project = p;
+                    }
                 }
-
-                Event ev = new Event(Day, dtp_Complete_Date.Value, dtp_Day.Value, txt_Title.Text, rtb_Description.Text, Completion, project);
-                Save_Event(ev);
+            }
+            Event edit_event;
+            bool duplicate = false;
+            foreach (Project p in file.All_Projects)
+            {
+                if (p.Title == txt_Title.Text)
+                {
+                    duplicate = true;
+                    MessageBox.Show("Event Title has same name as a Project", "Title ERROR");
+                    return;
+                }
+                foreach (Event ev in p.All_Events)
+                {
+                    if (ev.Title == txt_Title.Text)
+                    {
+                        edit_event = ev;
+                        duplicate = true;
+                    }
+                }
+            }
+            foreach (Event ev in file.Loose_Events)
+            {
+                if (ev.Title == txt_Title.Text)
+                {
+                    edit_event = ev;
+                    duplicate = true;
+                }
             }
 
-            this.Close();
+            if (duplicate)
+            {
+                DialogResult dr = MessageBox.Show("Overwrite Event?", "Event Title is not unique", MessageBoxButtons.OKCancel);
+                if (dr == DialogResult.OK)
+                {
+                    edit_event = new Event(done, due_date, Day, dtp_Complete_Date.Value, dtp_Day.Value, txt_Title.Text, rtb_Description.Text, Completion, project);
+                    this.Close();
+                }
+                else
+                {
+                    return;
+                }
+            }
+            else
+            {
+                Event ev = new Event(done, due_date, Day, dtp_Complete_Date.Value, dtp_Day.Value, txt_Title.Text, rtb_Description.Text, Completion, project);
+                Save_Event(ev);
+                this.Close();
+            }
         }
 
         private void chk_Deadline_CheckedChanged(object sender, EventArgs e)
         {
             if (chk_Deadline.Checked == true)
             {
+                dtp_Day.Enabled = true;
                 due_date = true;
             }
             else
             {
+                dtp_Day.Enabled = false;
                 due_date = false;
             }
         }
@@ -127,9 +215,16 @@ namespace To_Do_App
         //private Project Selected_Project;
         private DateTime Day;
         float Completion;
-        bool New_Event = true;
         bool due_date;
-        bool complete_date;
-        
+        bool done = false;
+        Event edit_event;
+
+        private void lsv_Projects_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        {
+            if (lsv_Projects.SelectedItems.Count != 0)
+            {
+                txt_Project.Text = lsv_Projects.SelectedItems[0].Text;
+            }
+        }
     }
 }

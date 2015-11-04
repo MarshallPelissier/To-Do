@@ -29,7 +29,7 @@
         private void InitializeComponent()
         {
             this.pnl_Title = new System.Windows.Forms.Panel();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txt_Title_Value = new System.Windows.Forms.TextBox();
             this.txt_Title = new System.Windows.Forms.TextBox();
             this.btn_Delete_Project = new System.Windows.Forms.Button();
             this.btn_Save_Project = new System.Windows.Forms.Button();
@@ -43,11 +43,11 @@
             this.txt_Description = new System.Windows.Forms.TextBox();
             this.rtb_Description = new System.Windows.Forms.RichTextBox();
             this.pnl_Deadline = new System.Windows.Forms.Panel();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
+            this.chk_Deadline = new System.Windows.Forms.CheckBox();
             this.dtp_Day = new System.Windows.Forms.DateTimePicker();
             this.txt_Deadline = new System.Windows.Forms.TextBox();
             this.pnl_Completion = new System.Windows.Forms.Panel();
+            this.txt_Completion_Value = new System.Windows.Forms.TextBox();
             this.chk_done = new System.Windows.Forms.CheckBox();
             this.dtp_Complete_Date = new System.Windows.Forms.DateTimePicker();
             this.txt_Completion = new System.Windows.Forms.TextBox();
@@ -62,21 +62,21 @@
             // 
             this.pnl_Title.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnl_Title.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_Title.Controls.Add(this.textBox2);
+            this.pnl_Title.Controls.Add(this.txt_Title_Value);
             this.pnl_Title.Controls.Add(this.txt_Title);
             this.pnl_Title.Location = new System.Drawing.Point(15, 45);
             this.pnl_Title.Name = "pnl_Title";
             this.pnl_Title.Size = new System.Drawing.Size(400, 100);
             this.pnl_Title.TabIndex = 15;
             // 
-            // textBox2
+            // txt_Title_Value
             // 
-            this.textBox2.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox2.Location = new System.Drawing.Point(50, 50);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(300, 33);
-            this.textBox2.TabIndex = 1;
-            this.textBox2.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
+            this.txt_Title_Value.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Title_Value.Location = new System.Drawing.Point(50, 50);
+            this.txt_Title_Value.Name = "txt_Title_Value";
+            this.txt_Title_Value.Size = new System.Drawing.Size(300, 33);
+            this.txt_Title_Value.TabIndex = 1;
+            this.txt_Title_Value.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // txt_Title
             // 
@@ -196,8 +196,7 @@
             // 
             this.pnl_Deadline.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnl_Deadline.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.pnl_Deadline.Controls.Add(this.radioButton4);
-            this.pnl_Deadline.Controls.Add(this.radioButton5);
+            this.pnl_Deadline.Controls.Add(this.chk_Deadline);
             this.pnl_Deadline.Controls.Add(this.dtp_Day);
             this.pnl_Deadline.Controls.Add(this.txt_Deadline);
             this.pnl_Deadline.Location = new System.Drawing.Point(600, 175);
@@ -205,31 +204,16 @@
             this.pnl_Deadline.Size = new System.Drawing.Size(270, 100);
             this.pnl_Deadline.TabIndex = 18;
             // 
-            // radioButton4
+            // chk_Deadline
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.radioButton4.Location = new System.Drawing.Point(224, 14);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(25, 30);
-            this.radioButton4.TabIndex = 2;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "No";
-            this.radioButton4.UseVisualStyleBackColor = true;
-            // 
-            // radioButton5
-            // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.CheckAlign = System.Drawing.ContentAlignment.BottomCenter;
-            this.radioButton5.Location = new System.Drawing.Point(165, 14);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(29, 30);
-            this.radioButton5.TabIndex = 1;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Yes";
-            this.radioButton5.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            this.radioButton5.TextImageRelation = System.Windows.Forms.TextImageRelation.TextBeforeImage;
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.chk_Deadline.AutoSize = true;
+            this.chk_Deadline.CheckAlign = System.Drawing.ContentAlignment.MiddleRight;
+            this.chk_Deadline.Location = new System.Drawing.Point(149, 24);
+            this.chk_Deadline.Name = "chk_Deadline";
+            this.chk_Deadline.Size = new System.Drawing.Size(15, 14);
+            this.chk_Deadline.TabIndex = 13;
+            this.chk_Deadline.UseVisualStyleBackColor = true;
+            this.chk_Deadline.CheckedChanged += new System.EventHandler(this.chk_Deadline_CheckedChanged);
             // 
             // dtp_Day
             // 
@@ -256,6 +240,7 @@
             // 
             this.pnl_Completion.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnl_Completion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Completion.Controls.Add(this.txt_Completion_Value);
             this.pnl_Completion.Controls.Add(this.chk_done);
             this.pnl_Completion.Controls.Add(this.dtp_Complete_Date);
             this.pnl_Completion.Controls.Add(this.txt_Completion);
@@ -263,6 +248,16 @@
             this.pnl_Completion.Name = "pnl_Completion";
             this.pnl_Completion.Size = new System.Drawing.Size(400, 100);
             this.pnl_Completion.TabIndex = 17;
+            // 
+            // txt_Completion_Value
+            // 
+            this.txt_Completion_Value.BackColor = System.Drawing.SystemColors.MenuBar;
+            this.txt_Completion_Value.Font = new System.Drawing.Font("Tahoma", 15.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Completion_Value.Location = new System.Drawing.Point(181, 20);
+            this.txt_Completion_Value.Name = "txt_Completion_Value";
+            this.txt_Completion_Value.Size = new System.Drawing.Size(68, 33);
+            this.txt_Completion_Value.TabIndex = 2;
+            this.txt_Completion_Value.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // chk_done
             // 
@@ -340,7 +335,7 @@
         #endregion
 
         private System.Windows.Forms.Panel pnl_Title;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txt_Title_Value;
         private System.Windows.Forms.TextBox txt_Title;
         private System.Windows.Forms.Button btn_Delete_Project;
         private System.Windows.Forms.Button btn_Save_Project;
@@ -351,8 +346,6 @@
         private System.Windows.Forms.TextBox txt_Description;
         private System.Windows.Forms.RichTextBox rtb_Description;
         private System.Windows.Forms.Panel pnl_Deadline;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton5;
         private System.Windows.Forms.DateTimePicker dtp_Day;
         private System.Windows.Forms.TextBox txt_Deadline;
         private System.Windows.Forms.Panel pnl_Completion;
@@ -362,5 +355,7 @@
         private System.Windows.Forms.ColumnHeader clh_Events;
         private System.Windows.Forms.ColumnHeader clh_Completion;
         private System.Windows.Forms.CheckBox chk_done;
+        private System.Windows.Forms.CheckBox chk_Deadline;
+        private System.Windows.Forms.TextBox txt_Completion_Value;
     }
 }

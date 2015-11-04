@@ -36,15 +36,15 @@
             this.pnl_Date = new System.Windows.Forms.Panel();
             this.txt_Date = new System.Windows.Forms.TextBox();
             this.btn_Add_Event = new System.Windows.Forms.Button();
-            this.btn_Del_Event = new System.Windows.Forms.Button();
+            this.btn_Edit_Event = new System.Windows.Forms.Button();
             this.btn_Add_Project = new System.Windows.Forms.Button();
-            this.btn_Del_Project = new System.Windows.Forms.Button();
+            this.btn_Edit_Project = new System.Windows.Forms.Button();
             this.pnl_Date.SuspendLayout();
             this.SuspendLayout();
             // 
             // mnc_Date
             // 
-            this.mnc_Date.Location = new System.Drawing.Point(639, 45);
+            this.mnc_Date.Location = new System.Drawing.Point(640, 45);
             this.mnc_Date.MaximumSize = new System.Drawing.Size(1000, 1000);
             this.mnc_Date.MaxSelectionCount = 1;
             this.mnc_Date.Name = "mnc_Date";
@@ -53,6 +53,7 @@
             // 
             // trv_Daily_Events
             // 
+            this.trv_Daily_Events.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.trv_Daily_Events.Location = new System.Drawing.Point(15, 145);
             this.trv_Daily_Events.Name = "trv_Daily_Events";
             this.trv_Daily_Events.Size = new System.Drawing.Size(585, 435);
@@ -64,7 +65,7 @@
             this.clm_Events,
             this.clm_Due_Date});
             this.lsv_Due_Dates.GridLines = true;
-            this.lsv_Due_Dates.Location = new System.Drawing.Point(639, 219);
+            this.lsv_Due_Dates.Location = new System.Drawing.Point(640, 220);
             this.lsv_Due_Dates.Name = "lsv_Due_Dates";
             this.lsv_Due_Dates.Size = new System.Drawing.Size(227, 425);
             this.lsv_Due_Dates.TabIndex = 4;
@@ -74,12 +75,12 @@
             // clm_Events
             // 
             this.clm_Events.Text = "Events";
-            this.clm_Events.Width = 90;
+            this.clm_Events.Width = 94;
             // 
             // clm_Due_Date
             // 
             this.clm_Due_Date.Text = "Due Date";
-            this.clm_Due_Date.Width = 126;
+            this.clm_Due_Date.Width = 125;
             // 
             // pnl_Date
             // 
@@ -111,14 +112,15 @@
             this.btn_Add_Event.UseVisualStyleBackColor = true;
             this.btn_Add_Event.Click += new System.EventHandler(this.btn_Add_Event_Click);
             // 
-            // btn_Del_Event
+            // btn_Edit_Event
             // 
-            this.btn_Del_Event.Location = new System.Drawing.Point(160, 595);
-            this.btn_Del_Event.Name = "btn_Del_Event";
-            this.btn_Del_Event.Size = new System.Drawing.Size(100, 50);
-            this.btn_Del_Event.TabIndex = 7;
-            this.btn_Del_Event.Text = "Delete Event";
-            this.btn_Del_Event.UseVisualStyleBackColor = true;
+            this.btn_Edit_Event.Location = new System.Drawing.Point(160, 595);
+            this.btn_Edit_Event.Name = "btn_Edit_Event";
+            this.btn_Edit_Event.Size = new System.Drawing.Size(100, 50);
+            this.btn_Edit_Event.TabIndex = 7;
+            this.btn_Edit_Event.Text = "Edit Event";
+            this.btn_Edit_Event.UseVisualStyleBackColor = true;
+            this.btn_Edit_Event.Click += new System.EventHandler(this.btn_Edit_Event_Click);
             // 
             // btn_Add_Project
             // 
@@ -130,22 +132,23 @@
             this.btn_Add_Project.UseVisualStyleBackColor = true;
             this.btn_Add_Project.Click += new System.EventHandler(this.btn_Add_Project_Click);
             // 
-            // btn_Del_Project
+            // btn_Edit_Project
             // 
-            this.btn_Del_Project.Location = new System.Drawing.Point(500, 595);
-            this.btn_Del_Project.Name = "btn_Del_Project";
-            this.btn_Del_Project.Size = new System.Drawing.Size(100, 50);
-            this.btn_Del_Project.TabIndex = 8;
-            this.btn_Del_Project.Text = "Delete Project";
-            this.btn_Del_Project.UseVisualStyleBackColor = true;
+            this.btn_Edit_Project.Location = new System.Drawing.Point(500, 595);
+            this.btn_Edit_Project.Name = "btn_Edit_Project";
+            this.btn_Edit_Project.Size = new System.Drawing.Size(100, 50);
+            this.btn_Edit_Project.TabIndex = 8;
+            this.btn_Edit_Project.Text = "Edit Project";
+            this.btn_Edit_Project.UseVisualStyleBackColor = true;
+            this.btn_Edit_Project.Click += new System.EventHandler(this.btn_Edit_Project_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 661);
-            this.Controls.Add(this.btn_Del_Project);
-            this.Controls.Add(this.btn_Del_Event);
+            this.Controls.Add(this.btn_Edit_Project);
+            this.Controls.Add(this.btn_Edit_Event);
             this.Controls.Add(this.btn_Add_Event);
             this.Controls.Add(this.pnl_Date);
             this.Controls.Add(this.lsv_Due_Dates);
@@ -162,8 +165,8 @@
             this.Controls.SetChildIndex(this.lsv_Due_Dates, 0);
             this.Controls.SetChildIndex(this.pnl_Date, 0);
             this.Controls.SetChildIndex(this.btn_Add_Event, 0);
-            this.Controls.SetChildIndex(this.btn_Del_Event, 0);
-            this.Controls.SetChildIndex(this.btn_Del_Project, 0);
+            this.Controls.SetChildIndex(this.btn_Edit_Event, 0);
+            this.Controls.SetChildIndex(this.btn_Edit_Project, 0);
             this.pnl_Date.ResumeLayout(false);
             this.pnl_Date.PerformLayout();
             this.ResumeLayout(false);
@@ -181,9 +184,9 @@
         private System.Windows.Forms.Panel pnl_Date;
         private System.Windows.Forms.TextBox txt_Date;
         private System.Windows.Forms.Button btn_Add_Event;
-        private System.Windows.Forms.Button btn_Del_Event;
+        private System.Windows.Forms.Button btn_Edit_Event;
         private System.Windows.Forms.Button btn_Add_Project;
-        private System.Windows.Forms.Button btn_Del_Project;
+        private System.Windows.Forms.Button btn_Edit_Project;
     }
 }
 

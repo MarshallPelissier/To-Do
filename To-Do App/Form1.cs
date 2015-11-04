@@ -44,12 +44,72 @@ namespace To_Do_App
 
         private void btn_Add_Event_Click(object sender, EventArgs e)
         {
-            Show_Add_Event(mnc_Date.SelectionRange.Start,false);
+            Show_Add_Event(mnc_Date.SelectionRange.Start);
         }
 
+        private void btn_Edit_Event_Click(object sender, EventArgs e)
+        {
+            if (trv_Daily_Events.Nodes.Count == 0)
+            {
+                return;
+            }
+            string n = trv_Daily_Events.SelectedNode.Text;
+            Event edit_event = null;
+            foreach (Project p in file.All_Projects)
+            {
+                foreach (Event ev in p.All_Events)
+                {
+                    if (ev.Title == n)
+                    {
+                        edit_event = ev;
+                    }
+                }
+            }
+            foreach (Event ev in file.Loose_Events)
+            {
+                if (ev.Title == n)
+                {
+                    edit_event = ev;
+                }
+            }
+            if (edit_event != null)
+            {
+                Show_Edit_Event(edit_event);
+            }
+            else
+            {               
+                Show_Add_Event(mnc_Date.SelectionRange.Start);
+            }
+        }     
         private void btn_Add_Project_Click(object sender, EventArgs e)
         {
-            Show_Add_Project(mnc_Date.SelectionRange.Start,false);
+            Show_Add_Project(mnc_Date.SelectionRange.Start);
+        }
+
+        private void btn_Edit_Project_Click(object sender, EventArgs e)
+        {
+            if (trv_Daily_Events.Nodes.Count == 0)
+            {
+                return;
+            }
+            string n = trv_Daily_Events.SelectedNode.Tag.ToString();
+            Project edit_project = null;
+            foreach (Project p in file.All_Projects)
+            {
+                if (p.Title == n)
+                {
+                    edit_project = p;
+                }
+            }
+            
+            if (edit_project != null)
+            {
+                Show_Add_Project(edit_project);
+            }
+            else
+            {
+                Show_Add_Project(mnc_Date.SelectionRange.Start);
+            }
         }
 
         private void Form1_Activated(object sender, EventArgs e)
@@ -70,7 +130,8 @@ namespace To_Do_App
                     ListViewItem item = new ListViewItem();
                     item.Text = ev.Title;
                     item.Name = "lsi_" + ev.Title;
-                    item.SubItems.Add(ev.Completed.ToString("MM/dd/yyyy - hh:00 tt"));
+                    if(ev.Due_Date == true)
+                        item.SubItems.Add(ev.Completed.ToString("MM/dd/yyyy - hh:00 tt"));
                     List_View.Items.Add(item);
                 }
             }
@@ -80,9 +141,13 @@ namespace To_Do_App
                 ListViewItem item = new ListViewItem();
                 item.Text = ev.Title;
                 item.Name = "lsi_" + ev.Title;
-                item.SubItems.Add(ev.Completed.ToString("MM/dd/yyyy - hh:00 tt"));
+                if (ev.Due_Date == true)
+                    item.SubItems.Add(ev.Completed.ToString("MM/dd/yyyy - hh:00 tt"));
                 List_View.Items.Add(item);
             }
-        }     
+        }
+
+        
+
     }
 }
