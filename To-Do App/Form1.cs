@@ -147,7 +147,19 @@ namespace To_Do_App
             }
         }
 
-        
+        private void lsv_Due_Dates_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        protected override void Open_File()
+        {
+            base.Open_File();
+            Write_List(lsv_Due_Dates);
+            // treeview is stupid :(
+            this.Visible = false;
+            this.Visible = true;
+        }   
 
     }
 }

@@ -151,9 +151,28 @@ namespace To_Do_App
                 this.Close();
             }
         }
+        
+        private void btn_Delete_Project_Click(object sender, EventArgs e)
+        {
+            if (edit_project != null)
+            {
+                DialogResult dr = MessageBox.Show("Are you sure you want to delete this Project?", "Delete Project?", MessageBoxButtons.OKCancel);
+                if (dr == DialogResult.OK)
+                {
+                    file.All_Projects.Remove(edit_project);
+                    this.Close();
+                }
+                else
+                {
+                    return;
+                }
+            }
+        }   
         DateTime Day = DateTime.Today;
         bool done = false;
         bool due_date = false;
-        Project edit_project = null;     
+        Project edit_project = null;
+
+          
     }
 }

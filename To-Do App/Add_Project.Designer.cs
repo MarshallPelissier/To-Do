@@ -99,6 +99,7 @@
             this.btn_Delete_Project.TabIndex = 23;
             this.btn_Delete_Project.Text = "Delete Project";
             this.btn_Delete_Project.UseVisualStyleBackColor = true;
+            this.btn_Delete_Project.Click += new System.EventHandler(this.btn_Delete_Project_Click);
             // 
             // btn_Save_Project
             // 

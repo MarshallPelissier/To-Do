@@ -277,9 +277,8 @@ namespace To_Do_App
         OpenFileDialog ofd = new OpenFileDialog();
         SaveFileDialog sfd = new SaveFileDialog();
         static public To_Do_File file = new To_Do_File();
-        
 
-        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        protected virtual void Open_File() 
         {
             ofd.Filter = "TDF|*.tdf";
             ofd.Title = "Select File to Open";
@@ -287,11 +286,15 @@ namespace To_Do_App
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 System.IO.StreamReader input = new System.IO.StreamReader(ofd.FileName);
-                input = System.IO.File.OpenText(ofd.FileName);
                 De_Serial = input.ReadToEnd();
                 input.Close();
+                file = JsonConvert.DeserializeObject<To_Do_File>(De_Serial);
             }
-            
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Open_File();
         }
 
         private void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -301,9 +304,9 @@ namespace To_Do_App
             string Serial;
             if (sfd.ShowDialog() == DialogResult.OK)
             {
+                Serial = JsonConvert.SerializeObject(file, Formatting.Indented,new JsonSerializerSettings{PreserveReferencesHandling = PreserveReferencesHandling.Objects});
                 System.IO.StreamWriter output = new System.IO.StreamWriter(sfd.FileName);
-                output = System.IO.File.CreateText(sfd.FileName);
-                //output.Write(Serial);
+                output.Write(Serial);
                 output.Close();
             }
         }

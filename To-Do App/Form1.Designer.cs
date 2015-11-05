@@ -71,6 +71,7 @@
             this.lsv_Due_Dates.TabIndex = 4;
             this.lsv_Due_Dates.UseCompatibleStateImageBehavior = false;
             this.lsv_Due_Dates.View = System.Windows.Forms.View.Details;
+            this.lsv_Due_Dates.SelectedIndexChanged += new System.EventHandler(this.lsv_Due_Dates_SelectedIndexChanged);
             // 
             // clm_Events
             // 

@@ -187,6 +187,33 @@ namespace To_Do_App
             }
         }
 
+        private void btn_Del_Event_Click(object sender, EventArgs e)
+        {
+            if (edit_event != null)
+            {
+                if (edit_event != null)
+                {
+                    DialogResult dr = MessageBox.Show("Are you sure you want to delete this Event?", "Delete Event?", MessageBoxButtons.OKCancel);
+                    if (dr == DialogResult.OK)
+                    {
+                        if (edit_event.Assigned_Project != null)
+                        {
+                            edit_event.Assigned_Project.All_Events.Remove(edit_event);
+                        }
+                        else
+                        {
+                            file.Loose_Events.Remove(edit_event);
+                        }
+                        this.Close();
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+
         private void chk_Deadline_CheckedChanged(object sender, EventArgs e)
         {
             if (chk_Deadline.Checked == true)
@@ -226,5 +253,7 @@ namespace To_Do_App
                 txt_Project.Text = lsv_Projects.SelectedItems[0].Text;
             }
         }
+
+        
     }
 }

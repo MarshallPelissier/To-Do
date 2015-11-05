@@ -347,6 +347,7 @@
             this.btn_Del_Event.TabIndex = 12;
             this.btn_Del_Event.Text = "Delete Event";
             this.btn_Del_Event.UseVisualStyleBackColor = true;
+            this.btn_Del_Event.Click += new System.EventHandler(this.btn_Del_Event_Click);
             // 
             // btn_Del_Project
             // 
