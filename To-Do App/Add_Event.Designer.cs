@@ -49,13 +49,11 @@
             this.pnl_Projects = new System.Windows.Forms.Panel();
             this.chk_Project = new System.Windows.Forms.CheckBox();
             this.txt_Project = new System.Windows.Forms.TextBox();
-            this.lsv_Projects = new System.Windows.Forms.ListView();
-            this.clh_Projects = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
-            this.clh_Completion = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.btn_Save_Event = new System.Windows.Forms.Button();
             this.btn_Del_Event = new System.Windows.Forms.Button();
-            this.btn_Del_Project = new System.Windows.Forms.Button();
-            this.button3 = new System.Windows.Forms.Button();
+            this.trv_All_Events = new System.Windows.Forms.TreeView();
+            this.btn_List_Event = new System.Windows.Forms.Button();
+            this.txt_Completion_Children = new System.Windows.Forms.TextBox();
             this.pnl_Title.SuspendLayout();
             this.pnl_Completion.SuspendLayout();
             this.pnl_Deadline.SuspendLayout();
@@ -103,12 +101,12 @@
             this.dtp_Day.Name = "dtp_Day";
             this.dtp_Day.Size = new System.Drawing.Size(227, 20);
             this.dtp_Day.TabIndex = 10;
-            this.dtp_Day.ValueChanged += new System.EventHandler(this.dtp_Day_ValueChanged);
             // 
             // pnl_Completion
             // 
             this.pnl_Completion.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnl_Completion.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Completion.Controls.Add(this.txt_Completion_Children);
             this.pnl_Completion.Controls.Add(this.dtp_Complete_Date);
             this.pnl_Completion.Controls.Add(this.rad_done);
             this.pnl_Completion.Controls.Add(this.rad_3_4ths);
@@ -242,7 +240,6 @@
             this.txt_Deadline.TabIndex = 0;
             this.txt_Deadline.Text = "Deadline";
             this.txt_Deadline.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            this.txt_Deadline.TextChanged += new System.EventHandler(this.txt_Deadline_TextChanged);
             // 
             // rtb_Description
             // 
@@ -279,12 +276,12 @@
             // 
             this.pnl_Projects.BackColor = System.Drawing.SystemColors.ControlLight;
             this.pnl_Projects.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.pnl_Projects.Controls.Add(this.trv_All_Events);
             this.pnl_Projects.Controls.Add(this.chk_Project);
             this.pnl_Projects.Controls.Add(this.txt_Project);
-            this.pnl_Projects.Controls.Add(this.lsv_Projects);
             this.pnl_Projects.Location = new System.Drawing.Point(600, 295);
             this.pnl_Projects.Name = "pnl_Projects";
-            this.pnl_Projects.Size = new System.Drawing.Size(270, 285);
+            this.pnl_Projects.Size = new System.Drawing.Size(270, 350);
             this.pnl_Projects.TabIndex = 11;
             // 
             // chk_Project
@@ -304,30 +301,6 @@
             this.txt_Project.Size = new System.Drawing.Size(208, 20);
             this.txt_Project.TabIndex = 2;
             this.txt_Project.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
-            // lsv_Projects
-            // 
-            this.lsv_Projects.Columns.AddRange(new System.Windows.Forms.ColumnHeader[] {
-            this.clh_Projects,
-            this.clh_Completion});
-            this.lsv_Projects.Location = new System.Drawing.Point(20, 42);
-            this.lsv_Projects.MultiSelect = false;
-            this.lsv_Projects.Name = "lsv_Projects";
-            this.lsv_Projects.Size = new System.Drawing.Size(230, 223);
-            this.lsv_Projects.TabIndex = 3;
-            this.lsv_Projects.UseCompatibleStateImageBehavior = false;
-            this.lsv_Projects.View = System.Windows.Forms.View.Details;
-            this.lsv_Projects.ItemSelectionChanged += new System.Windows.Forms.ListViewItemSelectionChangedEventHandler(this.lsv_Projects_ItemSelectionChanged);
-            // 
-            // clh_Projects
-            // 
-            this.clh_Projects.Text = "Projects";
-            this.clh_Projects.Width = 138;
-            // 
-            // clh_Completion
-            // 
-            this.clh_Completion.Text = "Completion";
-            this.clh_Completion.Width = 66;
             // 
             // btn_Save_Event
             // 
@@ -349,32 +322,39 @@
             this.btn_Del_Event.UseVisualStyleBackColor = true;
             this.btn_Del_Event.Click += new System.EventHandler(this.btn_Del_Event_Click);
             // 
-            // btn_Del_Project
+            // trv_All_Events
             // 
-            this.btn_Del_Project.Location = new System.Drawing.Point(750, 595);
-            this.btn_Del_Project.Name = "btn_Del_Project";
-            this.btn_Del_Project.Size = new System.Drawing.Size(100, 50);
-            this.btn_Del_Project.TabIndex = 14;
-            this.btn_Del_Project.Text = "Delete Project";
-            this.btn_Del_Project.UseVisualStyleBackColor = true;
+            this.trv_All_Events.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trv_All_Events.Location = new System.Drawing.Point(20, 42);
+            this.trv_All_Events.Name = "trv_All_Events";
+            this.trv_All_Events.Size = new System.Drawing.Size(230, 285);
+            this.trv_All_Events.TabIndex = 12;
+            this.trv_All_Events.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trv_All_Events_NodeMouseClick);
             // 
-            // button3
+            // btn_List_Event
             // 
-            this.button3.Location = new System.Drawing.Point(620, 595);
-            this.button3.Name = "button3";
-            this.button3.Size = new System.Drawing.Size(100, 50);
-            this.button3.TabIndex = 13;
-            this.button3.Text = "New Project";
-            this.button3.UseVisualStyleBackColor = true;
-            this.button3.Click += new System.EventHandler(this.button3_Click);
+            this.btn_List_Event.Location = new System.Drawing.Point(290, 595);
+            this.btn_List_Event.Name = "btn_List_Event";
+            this.btn_List_Event.Size = new System.Drawing.Size(100, 50);
+            this.btn_List_Event.TabIndex = 13;
+            this.btn_List_Event.Text = "Event List";
+            this.btn_List_Event.UseVisualStyleBackColor = true;
+            // 
+            // txt_Completion_Children
+            // 
+            this.txt_Completion_Children.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Completion_Children.Location = new System.Drawing.Point(65, 55);
+            this.txt_Completion_Children.Name = "txt_Completion_Children";
+            this.txt_Completion_Children.Size = new System.Drawing.Size(57, 27);
+            this.txt_Completion_Children.TabIndex = 2;
+            this.txt_Completion_Children.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Add_Event
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 661);
-            this.Controls.Add(this.btn_Del_Project);
-            this.Controls.Add(this.button3);
+            this.Controls.Add(this.btn_List_Event);
             this.Controls.Add(this.btn_Del_Event);
             this.Controls.Add(this.btn_Save_Event);
             this.Controls.Add(this.pnl_Projects);
@@ -392,8 +372,7 @@
             this.Controls.SetChildIndex(this.pnl_Projects, 0);
             this.Controls.SetChildIndex(this.btn_Save_Event, 0);
             this.Controls.SetChildIndex(this.btn_Del_Event, 0);
-            this.Controls.SetChildIndex(this.button3, 0);
-            this.Controls.SetChildIndex(this.btn_Del_Project, 0);
+            this.Controls.SetChildIndex(this.btn_List_Event, 0);
             this.pnl_Title.ResumeLayout(false);
             this.pnl_Title.PerformLayout();
             this.pnl_Completion.ResumeLayout(false);
@@ -431,13 +410,11 @@
         private System.Windows.Forms.DateTimePicker dtp_Complete_Date;
         private System.Windows.Forms.Button btn_Save_Event;
         private System.Windows.Forms.Button btn_Del_Event;
-        private System.Windows.Forms.Button btn_Del_Project;
-        private System.Windows.Forms.Button button3;
-        private System.Windows.Forms.ListView lsv_Projects;
-        private System.Windows.Forms.ColumnHeader clh_Projects;
-        private System.Windows.Forms.ColumnHeader clh_Completion;
         private System.Windows.Forms.CheckBox chk_Deadline;
         private System.Windows.Forms.CheckBox chk_Project;
         private System.Windows.Forms.TextBox txt_Project;
+        private System.Windows.Forms.TreeView trv_All_Events;
+        private System.Windows.Forms.TextBox txt_Completion_Children;
+        private System.Windows.Forms.Button btn_List_Event;
     }
 }

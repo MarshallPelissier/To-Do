@@ -37,9 +37,6 @@
             this.eventsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.newEventToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.eventListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.projectsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.newProjectToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.projectListToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.mnu_Main.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -48,8 +45,7 @@
             this.mnu_Main.BackColor = System.Drawing.SystemColors.ControlLight;
             this.mnu_Main.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
-            this.eventsToolStripMenuItem,
-            this.projectsToolStripMenuItem});
+            this.eventsToolStripMenuItem});
             this.mnu_Main.Location = new System.Drawing.Point(0, 0);
             this.mnu_Main.Name = "mnu_Main";
             this.mnu_Main.Size = new System.Drawing.Size(884, 24);
@@ -115,29 +111,6 @@
             this.eventListToolStripMenuItem.Text = "Event List";
             this.eventListToolStripMenuItem.Click += new System.EventHandler(this.eventListToolStripMenuItem_Click);
             // 
-            // projectsToolStripMenuItem
-            // 
-            this.projectsToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.newProjectToolStripMenuItem,
-            this.projectListToolStripMenuItem});
-            this.projectsToolStripMenuItem.Name = "projectsToolStripMenuItem";
-            this.projectsToolStripMenuItem.Size = new System.Drawing.Size(61, 20);
-            this.projectsToolStripMenuItem.Text = "Projects";
-            // 
-            // newProjectToolStripMenuItem
-            // 
-            this.newProjectToolStripMenuItem.Name = "newProjectToolStripMenuItem";
-            this.newProjectToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.newProjectToolStripMenuItem.Text = "New Project";
-            this.newProjectToolStripMenuItem.Click += new System.EventHandler(this.newProjectToolStripMenuItem_Click);
-            // 
-            // projectListToolStripMenuItem
-            // 
-            this.projectListToolStripMenuItem.Name = "projectListToolStripMenuItem";
-            this.projectListToolStripMenuItem.Size = new System.Drawing.Size(138, 22);
-            this.projectListToolStripMenuItem.Text = "Project List";
-            this.projectListToolStripMenuItem.Click += new System.EventHandler(this.projectListToolStripMenuItem_Click);
-            // 
             // BaseForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -164,8 +137,5 @@
         private System.Windows.Forms.ToolStripMenuItem eventsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem newEventToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem eventListToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem projectsToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem newProjectToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem projectListToolStripMenuItem;
     }
 }

@@ -39,6 +39,8 @@ namespace To_Do_App
         private void monthCalendar1_DateChanged(object sender, DateRangeEventArgs e)
         {
             txt_Date.Text = mnc_Date.SelectionRange.Start.ToString("MM/dd/yyyy");
+            this.Visible = false;
+            this.Visible = true;
             //dtp_Day.Value = mnc_Date.SelectionRange.Start;
         }
 
@@ -55,23 +57,15 @@ namespace To_Do_App
             }
             string n = trv_Daily_Events.SelectedNode.Text;
             Event edit_event = null;
-            foreach (Project p in file.All_Projects)
+            foreach (Event ev in file.All_Events)
             {
-                foreach (Event ev in p.All_Events)
+                edit_event = Find_Event(ev, n);
+                if (edit_event != null)
                 {
-                    if (ev.Title == n)
-                    {
-                        edit_event = ev;
-                    }
+                    break;
                 }
             }
-            foreach (Event ev in file.Loose_Events)
-            {
-                if (ev.Title == n)
-                {
-                    edit_event = ev;
-                }
-            }
+            
             if (edit_event != null)
             {
                 Show_Edit_Event(edit_event);
@@ -80,36 +74,22 @@ namespace To_Do_App
             {               
                 Show_Add_Event(mnc_Date.SelectionRange.Start);
             }
-        }     
-        private void btn_Add_Project_Click(object sender, EventArgs e)
-        {
-            Show_Add_Project(mnc_Date.SelectionRange.Start);
         }
 
-        private void btn_Edit_Project_Click(object sender, EventArgs e)
+        private Event Find_Event(Event some_event, string name)
         {
-            if (trv_Daily_Events.Nodes.Count == 0)
+            if (some_event.Title == name)
             {
-                return;
+                return(some_event);
             }
-            string n = trv_Daily_Events.SelectedNode.Tag.ToString();
-            Project edit_project = null;
-            foreach (Project p in file.All_Projects)
+            foreach (Event ev in some_event.Child_Events)
             {
-                if (p.Title == n)
+                if(Find_Event(ev,name) != null)
                 {
-                    edit_project = p;
+                    return(ev);
                 }
             }
-            
-            if (edit_project != null)
-            {
-                Show_Add_Project(edit_project);
-            }
-            else
-            {
-                Show_Add_Project(mnc_Date.SelectionRange.Start);
-            }
+            return (null);
         }
 
         private void Form1_Activated(object sender, EventArgs e)
@@ -120,31 +100,33 @@ namespace To_Do_App
             Write_List(lsv_Due_Dates);
         }
 
-        public void Write_List(ListView List_View)
+        public void Write_List(ListView List_View, Event selected_event = null)
         {
-            
-            foreach (Project p in file.All_Projects)
+            if (selected_event == null)
             {
-                foreach (Event ev in p.All_Events)
+                foreach (Event e in file.All_Events)
+                {
+                    ListViewItem item = new ListViewItem();
+                    item.Text = e.Title;
+                    item.Name = "lsi_" + e.Title;
+                    if (e.Due_Date == true)
+                        item.SubItems.Add(e.Completed.ToString("MM/dd/yyyy - hh:00 tt"));
+                    List_View.Items.Add(item);
+
+                }
+            }
+            else
+            {
+                foreach (Event ev in selected_event.Child_Events)
                 {
                     ListViewItem item = new ListViewItem();
                     item.Text = ev.Title;
                     item.Name = "lsi_" + ev.Title;
-                    if(ev.Due_Date == true)
+                    if (ev.Due_Date == true)
                         item.SubItems.Add(ev.Completed.ToString("MM/dd/yyyy - hh:00 tt"));
                     List_View.Items.Add(item);
                 }
-            }
-
-            foreach (Event ev in file.Loose_Events)
-            {
-                ListViewItem item = new ListViewItem();
-                item.Text = ev.Title;
-                item.Name = "lsi_" + ev.Title;
-                if (ev.Due_Date == true)
-                    item.SubItems.Add(ev.Completed.ToString("MM/dd/yyyy - hh:00 tt"));
-                List_View.Items.Add(item);
-            }
+            }                       
         }
 
         private void lsv_Due_Dates_SelectedIndexChanged(object sender, EventArgs e)
@@ -156,10 +138,143 @@ namespace To_Do_App
         {
             base.Open_File();
             Write_List(lsv_Due_Dates);
-            // treeview is stupid :(
             this.Visible = false;
             this.Visible = true;
         }   
 
+        public void Write_Tree(TreeView Tree_View)
+        {
+
+            foreach (Event e in file.All_Events)
+            {
+                if (mnc_Date.SelectionRange.Start >e.Completed && e.Done)
+                {
+
+                }
+                else
+                {
+                    TreeNode nod = new TreeNode();
+                    if (e.Done == true)
+                    {
+                        nod.BackColor = Color.LightGray;
+                    }
+                    else if (e.Due_Date)
+                    {
+                        nod.BackColor = Color.LightCoral;
+                    }
+                    else if (e.Completion != 0)
+                    {
+                        nod.BackColor = Color.LightBlue;
+                    }
+                    else
+                    {
+                        nod.BackColor = Color.LightGreen;
+                    }
+                    nod.Text = e.Title;
+                    nod.Name = "trn_" + e.Title;
+                    Tree_View.Nodes.Add(nod);
+                    Tree_View.SelectedNode = nod;
+                    Write_Node(Tree_View, e);                 
+                }
+            }           
+            Tree_View.ExpandAll();           
+        }
+
+        public void Write_Node(TreeView Tree_View, Event write_event)
+        {
+            foreach (Event ev in write_event.Child_Events)
+            {
+                TreeNode node = new TreeNode();
+                if (ev.Done == true)
+                {
+                    node.BackColor = Color.LightGray;
+                }
+                else if (ev.Due_Date)
+                {
+                    node.BackColor = Color.LightCoral;
+                }
+                else if (ev.Completion != 0)
+                {
+                    node.BackColor = Color.LightBlue;
+                }
+                else
+                {
+                    node.BackColor = Color.LightGreen;
+                }
+                node.Text = ev.Title;
+                node.Tag = ev.Title;
+                node.Name = "trn_" + ev.Title;
+                
+                if (mnc_Date.SelectionRange.Start > ev.Completed && ev.Done)
+                {
+                }
+                else
+                {
+                    Tree_View.SelectedNode.Nodes.Add(node);
+                    if (ev.Child_Events.Count != 0)
+                    {
+                        Tree_View.SelectedNode = node;
+                    }
+                }
+                Write_Node(Tree_View, ev);
+            }
+        }
+
+        private void btn_Delete_Event_Click(object sender, EventArgs e)
+        {
+            string ename;
+            Event delete_event = null;
+            if (trv_Daily_Events.SelectedNode != null)
+            {
+                ename = trv_Daily_Events.SelectedNode.Text;
+                foreach (Event eve in file.All_Events)
+                {
+                    delete_event = Find_parent(eve, ename);
+                    if (delete_event != null)
+                    {
+                        break;
+                    }
+                }
+            }
+
+            if (delete_event != null)
+            {
+                if (delete_event != null)
+                {
+                    DialogResult dr = MessageBox.Show("Are you sure you want to delete this Event?", "Delete Event?", MessageBoxButtons.OKCancel);
+                    if (dr == DialogResult.OK)
+                    {
+                        foreach(Event eve in file.All_Events)
+                        {
+                            eve.Child_Events.Remove(delete_event);
+                        }
+                        file.All_Events.Remove(delete_event);
+                        this.Visible = false;
+                        this.Visible = true;
+                    }
+                    else
+                    {
+                        return;
+                    }
+                }
+            }
+        }
+
+        private Event Find_parent(Event some_event, string name)
+        {
+            if (some_event.Title == name)
+            {
+                return (some_event);
+            }
+            else
+            {
+                foreach (Event eve in some_event.Child_Events)
+                {
+                    return (Find_parent(eve, name));
+                }
+            }
+            return (null);
+        }
     }
 }
+

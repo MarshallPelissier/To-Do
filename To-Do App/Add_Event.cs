@@ -24,7 +24,8 @@ namespace To_Do_App
             dtp_Day.Value = day;
             dtp_Complete_Date.Value = day;
             Day = day;
-            Write_List(lsv_Projects);
+            Write_Tree(trv_All_Events);
+            //need to write to treeview
         }
         public Add_Event(Event new_event)
         {
@@ -36,19 +37,13 @@ namespace To_Do_App
             dtp_Day.Value = new_event.Due;
             txt_Title.Text = new_event.Title;
             rtb_Description.Text = new_event.Description;
-            Write_List(lsv_Projects);
             edit_event = new_event;
-            if (new_event.Assigned_Project != null)
-            {
-                foreach (ListViewItem p in lsv_Projects.Items)
-                {
-                    if (p.Text == new_event.Assigned_Project.Title)
-                    {
-                        lsv_Projects.Items[p.Index].Focused = true;
-                        lsv_Projects.Items[p.Index].Selected = true;
-                    }
-                }
-            }
+            Parent_Event = new_event.Parent_Event;
+            Write_Tree(trv_All_Events);
+            editing = true;
+            //need to write to treeview
+            //and select parent event and check checkbox
+            
         }
 
         private void rad_zero_CheckedChanged(object sender, EventArgs e)
@@ -98,25 +93,7 @@ namespace To_Do_App
         {
             dtp_Day.Format = DateTimePickerFormat.Custom;
             dtp_Day.CustomFormat = "MM/dd/yyyy - hh:00 tt";
-            //dtp_Due_Date.Format = DateTimePickerFormat.Custom;
-            //dtp_Due_Date.CustomFormat = "MM/dd/yyyy - hh:00 tt";
-
-        }
-
-        private void txt_Deadline_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void dtp_Day_ValueChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button3_Click(object sender, EventArgs e)
-        {
-            Show_Add_Project(DateTime.Today);
-        }
+        }     
 
         private void btn_Save_Event_Click(object sender, EventArgs e)
         {
@@ -125,44 +102,38 @@ namespace To_Do_App
                 MessageBox.Show("Event Title is blank","Title ERROR");
                 return;
             }
-            Project project = null;
+            Event parent_event = null;
             string pname;
-            if (lsv_Projects.SelectedItems.Count != 0 && chk_Project.Checked)
-            {
-                pname = lsv_Projects.SelectedItems[0].Text;
-                foreach (Project p in file.All_Projects)
-                {
-                    if (p.Title == pname)
-                    {
-                        project = p;
-                    }
-                }
-            }
-            Event edit_event;
+            
+
             bool duplicate = false;
-            foreach (Project p in file.All_Projects)
+
+            if (editing)
             {
-                if (p.Title == txt_Title.Text)
+                duplicate = true;
+            }
+            else
+            {
+                foreach (Event test_event in file.All_Events)
                 {
-                    duplicate = true;
-                    MessageBox.Show("Event Title has same name as a Project", "Title ERROR");
-                    return;
-                }
-                foreach (Event ev in p.All_Events)
-                {
-                    if (ev.Title == txt_Title.Text)
+                    duplicate = Check_Duplicate(test_event, txt_Title.Text);
+                    if (duplicate == true)
                     {
-                        edit_event = ev;
-                        duplicate = true;
+                        break;
                     }
                 }
             }
-            foreach (Event ev in file.Loose_Events)
+
+            if (trv_All_Events.SelectedNode != null && chk_Project.Checked)
             {
-                if (ev.Title == txt_Title.Text)
+                pname = trv_All_Events.SelectedNode.Text;
+                foreach (Event eve in file.All_Events)
                 {
-                    edit_event = ev;
-                    duplicate = true;
+                    parent_event = Find_parent(eve, pname);
+                    if (parent_event != null)
+                    {
+                        break;
+                    }
                 }
             }
 
@@ -170,8 +141,37 @@ namespace To_Do_App
             {
                 DialogResult dr = MessageBox.Show("Overwrite Event?", "Event Title is not unique", MessageBoxButtons.OKCancel);
                 if (dr == DialogResult.OK)
-                {
-                    edit_event = new Event(done, due_date, Day, dtp_Complete_Date.Value, dtp_Day.Value, txt_Title.Text, rtb_Description.Text, Completion, project);
+                {                    
+                    //edit_event = new Event(done, due_date, Day, dtp_Complete_Date.Value, dtp_Day.Value, txt_Title.Text, rtb_Description.Text, Completion, parent_event);
+                    if (edit_event.Parent_Event != null)
+                    {
+                        edit_event.Parent_Event.Child_Events.Remove(edit_event);
+                    }
+                    else
+                    {
+                        file.All_Events.Remove(edit_event);
+                    }
+                    edit_event.Done = done;
+                    edit_event.Due_Date = due_date;
+                    edit_event.Created = Day;
+                    edit_event.Completed = dtp_Complete_Date.Value;
+                    edit_event.Due = dtp_Day.Value;
+                    edit_event.Title = txt_Title.Text;
+                    edit_event.Description = rtb_Description.Text;
+                    edit_event.Completion = Completion;
+                    if (edit_event == parent_event)
+                    {
+                        parent_event = null;
+                    }
+                    edit_event.Parent_Event = parent_event;
+                    if (parent_event != null)
+                    {
+                        edit_event.Parent_Event.Child_Events.Add(edit_event);
+                    }
+                    else
+                    {
+                        file.All_Events.Add(edit_event);
+                    }
                     this.Close();
                 }
                 else
@@ -181,10 +181,46 @@ namespace To_Do_App
             }
             else
             {
-                Event ev = new Event(done, due_date, Day, dtp_Complete_Date.Value, dtp_Day.Value, txt_Title.Text, rtb_Description.Text, Completion, project);
+                Event ev = new Event(done, due_date, Day, dtp_Complete_Date.Value, dtp_Day.Value, txt_Title.Text, rtb_Description.Text, Completion, parent_event);
                 Save_Event(ev);
                 this.Close();
             }
+        }
+
+        private Event Find_parent(Event some_event, string name)
+        {
+            if (some_event.Title == name)
+            {
+                return (some_event);
+            }
+            else
+            {
+                foreach (Event eve in some_event.Child_Events)
+                {
+                    return (Find_parent(eve,name));
+                }
+            }
+            return (null);
+        }
+
+        private bool Check_Duplicate(Event some_event, string name)
+        {
+            if (some_event.Title == name)
+            {
+                edit_event = some_event;
+                return (true);
+            }
+            else
+            {
+                foreach (Event eve in some_event.Child_Events)
+                {
+                    if (Check_Duplicate(eve, name))
+                    {
+                        return (true);
+                    }
+                }
+            }
+            return (false);
         }
 
         private void btn_Del_Event_Click(object sender, EventArgs e)
@@ -196,13 +232,13 @@ namespace To_Do_App
                     DialogResult dr = MessageBox.Show("Are you sure you want to delete this Event?", "Delete Event?", MessageBoxButtons.OKCancel);
                     if (dr == DialogResult.OK)
                     {
-                        if (edit_event.Assigned_Project != null)
+                        if (edit_event.Parent_Event != null)
                         {
-                            edit_event.Assigned_Project.All_Events.Remove(edit_event);
+                            edit_event.Parent_Event.Child_Events.Remove(edit_event);
                         }
                         else
                         {
-                            file.Loose_Events.Remove(edit_event);
+                            file.All_Events.Remove(edit_event);
                         }
                         this.Close();
                     }
@@ -227,33 +263,99 @@ namespace To_Do_App
                 due_date = false;
             }
         }
-
-        public void Write_List(ListView List_View)
-        {            
-            foreach (Project p in file.All_Projects)
-            {
-                ListViewItem item = new ListViewItem();
-                item.Text = p.Title;
-                item.Name = "lsi_" + p.Title;
-                item.SubItems.Add(p.Completed.ToString());
-                List_View.Items.Add(item);
-            }          
-        }
+       
         //private Project Selected_Project;
         private DateTime Day;
         float Completion;
         bool due_date;
         bool done = false;
+        bool editing = false;
         Event edit_event;
+        Event Parent_Event = null;
 
-        private void lsv_Projects_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void trv_All_Events_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
         {
-            if (lsv_Projects.SelectedItems.Count != 0)
+            if (trv_All_Events.SelectedNode != null)
             {
-                txt_Project.Text = lsv_Projects.SelectedItems[0].Text;
+                txt_Project.Text = trv_All_Events.SelectedNode.Text;
             }
         }
 
-        
+        public void Write_Tree(TreeView Tree_View)
+        {
+
+            foreach (Event e in file.All_Events)
+            {
+                if (Day > e.Completed && e.Done)
+                {
+
+                }
+                else
+                {
+                    TreeNode nod = new TreeNode();
+                    if (e.Done == true)
+                    {
+                        nod.BackColor = Color.LightGray;
+                    }
+                    else if (e.Due_Date)
+                    {
+                        nod.BackColor = Color.LightCoral;
+                    }
+                    else if (e.Completion != 0)
+                    {
+                        nod.BackColor = Color.LightBlue;
+                    }
+                    else
+                    {
+                        nod.BackColor = Color.LightGreen;
+                    }
+                    nod.Text = e.Title;
+                    nod.Name = "trn_" + e.Title;
+                    Tree_View.Nodes.Add(nod);
+                    Tree_View.SelectedNode = nod;
+                    Write_Node(Tree_View, e);
+                }
+            }
+            Tree_View.ExpandAll();
+        }
+
+        public void Write_Node(TreeView Tree_View, Event write_event)
+        {
+            foreach (Event ev in write_event.Child_Events)
+            {
+                TreeNode node = new TreeNode();
+                if (ev.Done == true)
+                {
+                    node.BackColor = Color.LightGray;
+                }
+                else if (ev.Due_Date)
+                {
+                    node.BackColor = Color.LightCoral;
+                }
+                else if (ev.Completion != 0)
+                {
+                    node.BackColor = Color.LightBlue;
+                }
+                else
+                {
+                    node.BackColor = Color.LightGreen;
+                }
+                node.Text = ev.Title;
+                node.Tag = ev.Title;
+                node.Name = "trn_" + ev.Title;
+                if (Day > ev.Completed && ev.Done)
+                {
+                }
+                else
+                {
+                    Tree_View.SelectedNode.Nodes.Add(node);
+                    if (ev.Child_Events.Count != 0)
+                    {
+                        Tree_View.SelectedNode = node;
+                    }
+                }
+                Write_Node(Tree_View, ev);
+            }
+        }       
     }
 }

@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.mnc_Date = new System.Windows.Forms.MonthCalendar();
             this.trv_Daily_Events = new System.Windows.Forms.TreeView();
             this.lsv_Due_Dates = new System.Windows.Forms.ListView();
@@ -37,9 +38,10 @@
             this.txt_Date = new System.Windows.Forms.TextBox();
             this.btn_Add_Event = new System.Windows.Forms.Button();
             this.btn_Edit_Event = new System.Windows.Forms.Button();
-            this.btn_Add_Project = new System.Windows.Forms.Button();
-            this.btn_Edit_Project = new System.Windows.Forms.Button();
+            this.bindingSource1 = new System.Windows.Forms.BindingSource(this.components);
+            this.btn_Delete_Event = new System.Windows.Forms.Button();
             this.pnl_Date.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
             // 
             // mnc_Date
@@ -123,53 +125,42 @@
             this.btn_Edit_Event.UseVisualStyleBackColor = true;
             this.btn_Edit_Event.Click += new System.EventHandler(this.btn_Edit_Event_Click);
             // 
-            // btn_Add_Project
+            // btn_Delete_Event
             // 
-            this.btn_Add_Project.Location = new System.Drawing.Point(370, 595);
-            this.btn_Add_Project.Name = "btn_Add_Project";
-            this.btn_Add_Project.Size = new System.Drawing.Size(100, 50);
-            this.btn_Add_Project.TabIndex = 6;
-            this.btn_Add_Project.Text = "New Project";
-            this.btn_Add_Project.UseVisualStyleBackColor = true;
-            this.btn_Add_Project.Click += new System.EventHandler(this.btn_Add_Project_Click);
-            // 
-            // btn_Edit_Project
-            // 
-            this.btn_Edit_Project.Location = new System.Drawing.Point(500, 595);
-            this.btn_Edit_Project.Name = "btn_Edit_Project";
-            this.btn_Edit_Project.Size = new System.Drawing.Size(100, 50);
-            this.btn_Edit_Project.TabIndex = 8;
-            this.btn_Edit_Project.Text = "Edit Project";
-            this.btn_Edit_Project.UseVisualStyleBackColor = true;
-            this.btn_Edit_Project.Click += new System.EventHandler(this.btn_Edit_Project_Click);
+            this.btn_Delete_Event.Location = new System.Drawing.Point(290, 595);
+            this.btn_Delete_Event.Name = "btn_Delete_Event";
+            this.btn_Delete_Event.Size = new System.Drawing.Size(100, 50);
+            this.btn_Delete_Event.TabIndex = 8;
+            this.btn_Delete_Event.Text = "Delete Event";
+            this.btn_Delete_Event.UseVisualStyleBackColor = true;
+            this.btn_Delete_Event.Click += new System.EventHandler(this.btn_Delete_Event_Click);
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 661);
-            this.Controls.Add(this.btn_Edit_Project);
+            this.Controls.Add(this.btn_Delete_Event);
             this.Controls.Add(this.btn_Edit_Event);
             this.Controls.Add(this.btn_Add_Event);
             this.Controls.Add(this.pnl_Date);
             this.Controls.Add(this.lsv_Due_Dates);
             this.Controls.Add(this.trv_Daily_Events);
             this.Controls.Add(this.mnc_Date);
-            this.Controls.Add(this.btn_Add_Project);
             this.Name = "Form1";
             this.Text = "TO DO";
             this.Activated += new System.EventHandler(this.Form1_Activated);
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.Controls.SetChildIndex(this.btn_Add_Project, 0);
             this.Controls.SetChildIndex(this.mnc_Date, 0);
             this.Controls.SetChildIndex(this.trv_Daily_Events, 0);
             this.Controls.SetChildIndex(this.lsv_Due_Dates, 0);
             this.Controls.SetChildIndex(this.pnl_Date, 0);
             this.Controls.SetChildIndex(this.btn_Add_Event, 0);
             this.Controls.SetChildIndex(this.btn_Edit_Event, 0);
-            this.Controls.SetChildIndex(this.btn_Edit_Project, 0);
+            this.Controls.SetChildIndex(this.btn_Delete_Event, 0);
             this.pnl_Date.ResumeLayout(false);
             this.pnl_Date.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -186,8 +177,8 @@
         private System.Windows.Forms.TextBox txt_Date;
         private System.Windows.Forms.Button btn_Add_Event;
         private System.Windows.Forms.Button btn_Edit_Event;
-        private System.Windows.Forms.Button btn_Add_Project;
-        private System.Windows.Forms.Button btn_Edit_Project;
+        private System.Windows.Forms.BindingSource bindingSource1;
+        private System.Windows.Forms.Button btn_Delete_Event;
     }
 }
 

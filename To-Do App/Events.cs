@@ -38,7 +38,7 @@ namespace To_Do_App
 
         private void button3_Click(object sender, EventArgs e)
         {
-            Show_Add_Project(DateTime.Today);
+            //Show_Add_Project(DateTime.Today);
         }
     }
 }

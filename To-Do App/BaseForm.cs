@@ -58,49 +58,7 @@ namespace To_Do_App
                 ae.Activate();
             }
         }
-        public void Show_Projects()
-        {
-            Form p = Application.OpenForms["Projects"];
-            var new_Projects = new Projects();
-            if (p == null)
-            {
-                new_Projects.Show();
-            }
-            else
-            {
-                p.Activate();
-            }
-
-        }
-
-        public void Show_Add_Project(DateTime day)
-        {
-            Form ap = Application.OpenForms["Add_Project"];
-            var new_Add_Project = new Add_Project(day);
-            if (ap == null)
-            {
-                new_Add_Project.Show();
-            }
-            else
-            {
-                ap.Activate();
-            }
-        }
-
-        public void Show_Add_Project(Project new_project)
-        {
-            Form ap = Application.OpenForms["Add_Project"];
-            var new_Add_Project = new Add_Project(new_project);
-            if (ap == null)
-            {
-                new_Add_Project.Show();
-            }
-            else
-            {
-                ap.Activate();
-            }
-        }
-
+        
         private void newEventToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Show_Add_Event(DateTime.Today);
@@ -109,49 +67,36 @@ namespace To_Do_App
         private void eventListToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Show_Events();
-        }
-
-        private void newProjectToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Show_Add_Project(DateTime.Today);
-        }
-
-        private void projectListToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            Show_Projects();
-        }
+        }        
 
         public void Save_Event(Event new_event)
         {
-            if (new_event.Assigned_Project == null)
+            if (new_event.Parent_Event == null)
             {
-                file.Loose_Events.Add(new_event);
+                file.All_Events.Add(new_event);
             }
             else
             {
-                new_event.Assigned_Project.All_Events.Add(new_event);
+                new_event.Parent_Event.Child_Events.Add(new_event);
                 int i = 0;
                 float j = 0;
-                foreach (Event e in new_event.Assigned_Project.All_Events)
+                foreach (Event e in new_event.Parent_Event.Child_Events)
                 {
                     j += e.Completion;
                     i++;
                 }
-                new_event.Assigned_Project.Completion = (j / i);
+                new_event.Parent_Event.Completion_Children = (j / i);
             }
         }
 
-        public void Save_Project(Project new_project)
-        {
-            file.All_Projects.Add(new_project);
-        }
 
-
+        /*
         public void Write_Tree(TreeView Tree_View)
         {
             
             foreach (Project p in file.All_Projects)
             {
+                if (p.Done == true)
                 TreeNode nod = new TreeNode();
                 if (p.Done == true)
                 {
@@ -282,7 +227,7 @@ namespace To_Do_App
         {
             ofd.Filter = "TDF|*.tdf";
             ofd.Title = "Select File to Open";
-            string De_Serial = JsonConvert.SerializeObject(file);
+            string De_Serial;
             if (ofd.ShowDialog() == DialogResult.OK)
             {
                 System.IO.StreamReader input = new System.IO.StreamReader(ofd.FileName);
