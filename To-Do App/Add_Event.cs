@@ -18,7 +18,7 @@ namespace To_Do_App
             this.StartPosition = FormStartPosition.CenterParent;
         }
 
-        public Add_Event(DateTime day)
+        public Add_Event(DateTime day,string parent = "")
         {
             InitializeComponent();
             dtp_Day.Value = day;
@@ -26,6 +26,11 @@ namespace To_Do_App
             Day = day;
             Write_Tree(trv_All_Events);
             //need to write to treeview
+            if (parent != "")
+            {
+                chk_Project.Checked = true;
+                txt_Project.Text = parent;
+            }
         }
         public Add_Event(Event new_event)
         {
@@ -43,6 +48,11 @@ namespace To_Do_App
             editing = true;
             //need to write to treeview
             //and select parent event and check checkbox
+            if (new_event.Parent_Event != null)
+            {
+                chk_Project.Checked = true;
+                txt_Project.Text = new_event.Parent_Event.Title;
+            }
             
         }
 
@@ -126,10 +136,17 @@ namespace To_Do_App
 
             if (trv_All_Events.SelectedNode != null && chk_Project.Checked)
             {
-                pname = trv_All_Events.SelectedNode.Text;
+                pname = txt_Project.Text;
+
+                if (pname == txt_Title.Text)
+                {
+                    MessageBox.Show("Event has parent's name", "Title ERROR");
+                    return;
+                }
+
                 foreach (Event eve in file.All_Events)
                 {
-                    parent_event = Find_parent(eve, pname);
+                    parent_event = Find_Event(eve, pname);
                     if (parent_event != null)
                     {
                         break;
@@ -185,22 +202,7 @@ namespace To_Do_App
                 Save_Event(ev);
                 this.Close();
             }
-        }
-
-        private Event Find_parent(Event some_event, string name)
-        {
-            if (some_event.Title == name)
-            {
-                return (some_event);
-            }
-            else
-            {
-                foreach (Event eve in some_event.Child_Events)
-                {
-                    return (Find_parent(eve,name));
-                }
-            }
-            return (null);
+            data_changed();
         }
 
         private bool Check_Duplicate(Event some_event, string name)
@@ -273,13 +275,7 @@ namespace To_Do_App
         Event edit_event;
         Event Parent_Event = null;
 
-        private void trv_All_Events_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
-        {
-            if (trv_All_Events.SelectedNode != null)
-            {
-                txt_Project.Text = trv_All_Events.SelectedNode.Text;
-            }
-        }
+        
 
         public void Write_Tree(TreeView Tree_View)
         {
@@ -309,6 +305,7 @@ namespace To_Do_App
                     {
                         nod.BackColor = Color.LightGreen;
                     }
+                    nod.Tag = nod.BackColor;
                     nod.Text = e.Title;
                     nod.Name = "trn_" + e.Title;
                     Tree_View.Nodes.Add(nod);
@@ -327,6 +324,7 @@ namespace To_Do_App
                 if (ev.Done == true)
                 {
                     node.BackColor = Color.LightGray;
+                    
                 }
                 else if (ev.Due_Date)
                 {
@@ -341,7 +339,7 @@ namespace To_Do_App
                     node.BackColor = Color.LightGreen;
                 }
                 node.Text = ev.Title;
-                node.Tag = ev.Title;
+                node.Tag = node.BackColor;
                 node.Name = "trn_" + ev.Title;
                 if (Day > ev.Completed && ev.Done)
                 {
@@ -356,6 +354,51 @@ namespace To_Do_App
                 }
                 Write_Node(Tree_View, ev);
             }
-        }       
+        }        
+
+        private void trv_All_Events_DoubleClick(object sender, EventArgs e)
+        {
+            trv_All_Events.SelectedNode = null;
+        }
+
+        private void trv_All_Events_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            //Use a recrusion to clear the previos selection 
+            TreeNode current = trv_All_Events.Nodes[0];
+            while (current != null)
+            {
+                if (current != e.Node)
+                {
+                    current.BackColor = (Color)current.Tag;
+                    current.ForeColor = trv_All_Events.ForeColor;
+                }
+                if (current.Nodes.Count > 0)
+                    current = current.Nodes[0];
+                else if (current.NextNode != null)
+                    current = current.NextNode;
+                else if (current.Parent != null)
+                    current = current.Parent.NextNode;
+                else
+                    current = null;
+            }
+            //Set the back color of the selected node
+            if (trv_All_Events.SelectedNode != null && trv_All_Events.SelectedNode == e.Node)
+            {
+                e.Node.BackColor = ColorTranslator.FromHtml("#3399FF");
+                e.Node.ForeColor = Color.White;
+            }
+        }
+
+        private void trv_All_Events_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+            if(trv_All_Events.SelectedNode != null)
+            {
+                txt_Project.Text = trv_All_Events.SelectedNode.Text;
+            }
+            else
+            {
+                txt_Project.Text = "";
+            }
+        }
     }
 }

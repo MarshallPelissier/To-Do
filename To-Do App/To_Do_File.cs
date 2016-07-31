@@ -12,10 +12,12 @@ namespace To_Do_App
         {
 
         }
-               
+        
+            
         //public List<Project> All_Projects = new List<Project>();
         //public List<Event> Loose_Events = new List<Event>();
         public List<Event> All_Events = new List<Event>();
         
+
     }
 }

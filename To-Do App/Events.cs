@@ -34,11 +34,11 @@ namespace To_Do_App
         private void btn_Add_Event_Click(object sender, EventArgs e)
         {
             Show_Add_Event(DateTime.Today);
-        }
+        }       
 
-        private void button3_Click(object sender, EventArgs e)
+        private void btn_Edit_Event_Click(object sender, EventArgs e)
         {
-            //Show_Add_Project(DateTime.Today);
+            Show_Edit_Event(Find_Selected_List_Event(lsv_Events));
         }
     }
 }

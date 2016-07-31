@@ -8,6 +8,8 @@ namespace To_Do_App
 {
     public class Event
     {
+        public Event() { }
+
         public Event(bool done, bool due_date, DateTime created, DateTime completed, DateTime due, string title, string description, float completion, Event parent_event)
         {
             Done = done;
@@ -20,6 +22,8 @@ namespace To_Do_App
             Completion = completion;
             Parent_Event = parent_event;
         }
+
+        
 
         public void Add_Events(Event events)
         {
@@ -43,4 +47,5 @@ namespace To_Do_App
         public Event Parent_Event { get; set; }
         public List<Event> Child_Events = new List<Event>();
     }
+
 }

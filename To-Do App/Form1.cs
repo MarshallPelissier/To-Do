@@ -15,7 +15,7 @@ namespace To_Do_App
         public Form1()
         {
             InitializeComponent();
-
+            
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -26,7 +26,6 @@ namespace To_Do_App
             Write_List(lsv_Due_Dates);
         }
         
-
         private void CustomFormat()
         {
         //dtp_Day.Format = DateTimePickerFormat.Custom;
@@ -46,11 +45,17 @@ namespace To_Do_App
 
         private void btn_Add_Event_Click(object sender, EventArgs e)
         {
+            if (trv_Daily_Events.SelectedNode != null)
+            {
+                Show_Add_Event(mnc_Date.SelectionRange.Start,trv_Daily_Events.SelectedNode.Text);
+            }
             Show_Add_Event(mnc_Date.SelectionRange.Start);
         }
 
         private void btn_Edit_Event_Click(object sender, EventArgs e)
         {
+            Find_Tree_Event(trv_Daily_Events, mnc_Date);
+            /*
             if (trv_Daily_Events.Nodes.Count == 0)
             {
                 return;
@@ -73,23 +78,8 @@ namespace To_Do_App
             else
             {               
                 Show_Add_Event(mnc_Date.SelectionRange.Start);
-            }
-        }
-
-        private Event Find_Event(Event some_event, string name)
-        {
-            if (some_event.Title == name)
-            {
-                return(some_event);
-            }
-            foreach (Event ev in some_event.Child_Events)
-            {
-                if(Find_Event(ev,name) != null)
-                {
-                    return(ev);
-                }
-            }
-            return (null);
+            }  
+        */
         }
 
         private void Form1_Activated(object sender, EventArgs e)
@@ -140,6 +130,15 @@ namespace To_Do_App
             Write_List(lsv_Due_Dates);
             this.Visible = false;
             this.Visible = true;
+
+            if (SaveFile != "")
+            {
+                Text = "To Do   -   " + SaveFile;
+            }
+            else
+            {
+                Text = "To Do";
+            }
         }   
 
         public void Write_Tree(TreeView Tree_View)
@@ -170,6 +169,8 @@ namespace To_Do_App
                     {
                         nod.BackColor = Color.LightGreen;
                     }
+
+                    nod.Tag = nod.BackColor;
                     nod.Text = e.Title;
                     nod.Name = "trn_" + e.Title;
                     Tree_View.Nodes.Add(nod);
@@ -177,13 +178,16 @@ namespace To_Do_App
                     Write_Node(Tree_View, e);                 
                 }
             }           
-            Tree_View.ExpandAll();           
+            Tree_View.ExpandAll();
+            Tree_View.Refresh();
+            Tree_View.SelectedNode = null;
         }
 
         public void Write_Node(TreeView Tree_View, Event write_event)
         {
             foreach (Event ev in write_event.Child_Events)
-            {
+            {   
+                            
                 TreeNode node = new TreeNode();
                 if (ev.Done == true)
                 {
@@ -201,8 +205,9 @@ namespace To_Do_App
                 {
                     node.BackColor = Color.LightGreen;
                 }
+                node.Tag = node.BackColor;
                 node.Text = ev.Title;
-                node.Tag = ev.Title;
+                node.Tag = node.BackColor;
                 node.Name = "trn_" + ev.Title;
                 
                 if (mnc_Date.SelectionRange.Start > ev.Completed && ev.Done)
@@ -215,8 +220,14 @@ namespace To_Do_App
                     {
                         Tree_View.SelectedNode = node;
                     }
+                    else
+                    {
+                        
+                    }
                 }
                 Write_Node(Tree_View, ev);
+                if (ev.Child_Events.Count != 0)
+                    Tree_View.SelectedNode = Tree_View.SelectedNode.Parent;
             }
         }
 
@@ -229,7 +240,7 @@ namespace To_Do_App
                 ename = trv_Daily_Events.SelectedNode.Text;
                 foreach (Event eve in file.All_Events)
                 {
-                    delete_event = Find_parent(eve, ename);
+                    delete_event = Find_Event(eve, ename);
                     if (delete_event != null)
                     {
                         break;
@@ -241,7 +252,7 @@ namespace To_Do_App
             {
                 if (delete_event != null)
                 {
-                    DialogResult dr = MessageBox.Show("Are you sure you want to delete this Event?", "Delete Event?", MessageBoxButtons.OKCancel);
+                    DialogResult dr = MessageBox.Show("Are you sure you want to delete Event \""+trv_Daily_Events.SelectedNode.Text + "\"" , "Delete Event?", MessageBoxButtons.OKCancel);
                     if (dr == DialogResult.OK)
                     {
                         foreach(Event eve in file.All_Events)
@@ -258,23 +269,161 @@ namespace To_Do_App
                     }
                 }
             }
+            data_changed();
         }
 
-        private Event Find_parent(Event some_event, string name)
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            if (some_event.Title == name)
+            if (change == true)
             {
-                return (some_event);
+                Closing_Dialog(e);
+            }
+        }
+
+        private void Closing_Dialog(FormClosingEventArgs e)
+        {
+            DialogResult dlg = MessageBox.Show("Save changes?", "To Do", MessageBoxButtons.YesNoCancel);
+
+            if (dlg == DialogResult.Yes)
+            {
+                Save_File();
+                if (SaveFile == "")
+                {
+                    Closing_Dialog(e);
+                }
+                e.Cancel = false;
+            }
+            if (dlg == DialogResult.No)
+            {
+                e.Cancel = false;
+            }
+
+            if (dlg == DialogResult.Cancel)
+            {
+                e.Cancel = true;
+            }
+        }        
+
+        private void trv_Daily_Events_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {
+            //Use a recrusion to clear the previos selection 
+            TreeNode current = trv_Daily_Events.Nodes[0];
+            while (current != null)
+            {
+                if (current != e.Node)
+                {
+                    current.BackColor = (Color)current.Tag;
+                    current.ForeColor = trv_Daily_Events.ForeColor;
+                }
+                if (current.Nodes.Count > 0)
+                    current = current.Nodes[0];
+                else if (current.NextNode != null)
+                    current = current.NextNode;
+                else if (current.Parent != null)
+                    current = current.Parent.NextNode;
+                else
+                    current = null;
+            }
+            //Set the back color of the selected node
+            if (trv_Daily_Events.SelectedNode != null && trv_Daily_Events.SelectedNode == e.Node)
+            {
+                e.Node.BackColor = ColorTranslator.FromHtml("#3399FF");
+                e.Node.ForeColor = Color.White;
+            }
+            //cancle the selecting 
+            //e.Cancel = true;
+            //trv_Daily_Events.SelectedNode = e.Node;
+            if (trv_Daily_Events.SelectedNode != null)
+            {
+                txt_selected.Text = trv_Daily_Events.SelectedNode.Text;
             }
             else
             {
-                foreach (Event eve in some_event.Child_Events)
-                {
-                    return (Find_parent(eve, name));
-                }
+                txt_selected.Text = "No Event Selected";
             }
-            return (null);
         }
+
+        private void trv_Daily_Events_NodeMouseClick(object sender, TreeNodeMouseClickEventArgs e)
+        {
+        }
+
+        private void trv_Daily_Events_DoubleClick(object sender, EventArgs e)
+        {
+            trv_Daily_Events.SelectedNode = null;
+            if (trv_Daily_Events.SelectedNode != null)
+            {
+                txt_selected.Text = trv_Daily_Events.SelectedNode.Text;
+            }
+            else
+            {
+                txt_selected.Text = "No Event Selected";
+            }
+        }
+        
+        private void btn_Up_Click(object sender, EventArgs e)
+        {
+            string ename;
+            Event selected_event= null;
+            if (trv_Daily_Events.SelectedNode != null)
+            {
+                string nodeName = trv_Daily_Events.SelectedNode.Name;
+                ename = trv_Daily_Events.SelectedNode.Text;
+                foreach (Event eve in file.All_Events)
+                {
+                    selected_event = Find_Event(eve, ename);
+                    if (selected_event != null)
+                    {
+                        break;
+                    }
+                }
+                Move_Event(selected_event, true);
+                trv_Daily_Events.Nodes.Clear();
+                Write_Tree(trv_Daily_Events);
+                trv_Daily_Events.SelectedNode = trv_Daily_Events.Nodes.Find(nodeName, true)[0];
+                trv_Daily_Events.SelectedNode.BackColor = ColorTranslator.FromHtml("#3399FF");
+                trv_Daily_Events.SelectedNode.ForeColor = Color.White;
+            }
+        }
+
+        private void btn_Down_Click(object sender, EventArgs e)
+        {
+            string ename;
+            Event selected_event = null;
+            if (trv_Daily_Events.SelectedNode != null)
+            {
+                string nodeName = trv_Daily_Events.SelectedNode.Name;
+                TreeNode temp = trv_Daily_Events.SelectedNode;
+                ename = trv_Daily_Events.SelectedNode.Text;
+                foreach (Event eve in file.All_Events)
+                {
+                    selected_event = Find_Event(eve, ename);
+                    if (selected_event != null)
+                    {
+                        break;
+                    }
+                }
+                Move_Event(selected_event, false);
+                trv_Daily_Events.Nodes.Clear();
+                Write_Tree(trv_Daily_Events);
+                trv_Daily_Events.SelectedNode = trv_Daily_Events.Nodes.Find(nodeName, true)[0];
+                trv_Daily_Events.SelectedNode.BackColor = ColorTranslator.FromHtml("#3399FF");
+                trv_Daily_Events.SelectedNode.ForeColor = Color.White;
+            }
+        }
+
+        private void trv_Daily_Events_AfterSelect(object sender, TreeViewEventArgs e)
+        {
+            if (trv_Daily_Events.SelectedNode != null)
+            {
+                txt_selected.Text = trv_Daily_Events.SelectedNode.Text;
+            }
+            else
+            {
+                txt_selected.Text = "No Event Selected";
+            }
+        }
+        
+
     }
 }
 

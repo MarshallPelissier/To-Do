@@ -33,6 +33,7 @@
             this.txt_Title = new System.Windows.Forms.TextBox();
             this.dtp_Day = new System.Windows.Forms.DateTimePicker();
             this.pnl_Completion = new System.Windows.Forms.Panel();
+            this.txt_Completion_Children = new System.Windows.Forms.TextBox();
             this.dtp_Complete_Date = new System.Windows.Forms.DateTimePicker();
             this.rad_done = new System.Windows.Forms.RadioButton();
             this.rad_3_4ths = new System.Windows.Forms.RadioButton();
@@ -47,13 +48,12 @@
             this.pnl_Description = new System.Windows.Forms.Panel();
             this.txt_Description = new System.Windows.Forms.TextBox();
             this.pnl_Projects = new System.Windows.Forms.Panel();
+            this.trv_All_Events = new System.Windows.Forms.TreeView();
             this.chk_Project = new System.Windows.Forms.CheckBox();
             this.txt_Project = new System.Windows.Forms.TextBox();
             this.btn_Save_Event = new System.Windows.Forms.Button();
             this.btn_Del_Event = new System.Windows.Forms.Button();
-            this.trv_All_Events = new System.Windows.Forms.TreeView();
             this.btn_List_Event = new System.Windows.Forms.Button();
-            this.txt_Completion_Children = new System.Windows.Forms.TextBox();
             this.pnl_Title.SuspendLayout();
             this.pnl_Completion.SuspendLayout();
             this.pnl_Deadline.SuspendLayout();
@@ -118,6 +118,15 @@
             this.pnl_Completion.Name = "pnl_Completion";
             this.pnl_Completion.Size = new System.Drawing.Size(400, 100);
             this.pnl_Completion.TabIndex = 3;
+            // 
+            // txt_Completion_Children
+            // 
+            this.txt_Completion_Children.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_Completion_Children.Location = new System.Drawing.Point(65, 55);
+            this.txt_Completion_Children.Name = "txt_Completion_Children";
+            this.txt_Completion_Children.Size = new System.Drawing.Size(57, 27);
+            this.txt_Completion_Children.TabIndex = 2;
+            this.txt_Completion_Children.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // dtp_Complete_Date
             // 
@@ -284,6 +293,17 @@
             this.pnl_Projects.Size = new System.Drawing.Size(270, 350);
             this.pnl_Projects.TabIndex = 11;
             // 
+            // trv_All_Events
+            // 
+            this.trv_All_Events.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.trv_All_Events.Location = new System.Drawing.Point(20, 42);
+            this.trv_All_Events.Name = "trv_All_Events";
+            this.trv_All_Events.Size = new System.Drawing.Size(230, 285);
+            this.trv_All_Events.TabIndex = 12;
+            this.trv_All_Events.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.trv_All_Events_BeforeSelect);
+            this.trv_All_Events.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trv_All_Events_NodeMouseClick);
+            this.trv_All_Events.DoubleClick += new System.EventHandler(this.trv_All_Events_DoubleClick);
+            // 
             // chk_Project
             // 
             this.chk_Project.Location = new System.Drawing.Point(234, 17);
@@ -322,15 +342,6 @@
             this.btn_Del_Event.UseVisualStyleBackColor = true;
             this.btn_Del_Event.Click += new System.EventHandler(this.btn_Del_Event_Click);
             // 
-            // trv_All_Events
-            // 
-            this.trv_All_Events.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.trv_All_Events.Location = new System.Drawing.Point(20, 42);
-            this.trv_All_Events.Name = "trv_All_Events";
-            this.trv_All_Events.Size = new System.Drawing.Size(230, 285);
-            this.trv_All_Events.TabIndex = 12;
-            this.trv_All_Events.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trv_All_Events_NodeMouseClick);
-            // 
             // btn_List_Event
             // 
             this.btn_List_Event.Location = new System.Drawing.Point(290, 595);
@@ -339,15 +350,6 @@
             this.btn_List_Event.TabIndex = 13;
             this.btn_List_Event.Text = "Event List";
             this.btn_List_Event.UseVisualStyleBackColor = true;
-            // 
-            // txt_Completion_Children
-            // 
-            this.txt_Completion_Children.Font = new System.Drawing.Font("Tahoma", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_Completion_Children.Location = new System.Drawing.Point(65, 55);
-            this.txt_Completion_Children.Name = "txt_Completion_Children";
-            this.txt_Completion_Children.Size = new System.Drawing.Size(57, 27);
-            this.txt_Completion_Children.TabIndex = 2;
-            this.txt_Completion_Children.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             // 
             // Add_Event
             // 
