@@ -150,12 +150,17 @@ namespace To_Do_App
         }        
 
         private void trv_Daily_Events_BeforeSelect(object sender, TreeViewCancelEventArgs e)
+        {           
+            Highlight_Node(e.Node);
+        }
+
+        public void Highlight_Node(TreeNode nod, string color = "#3399FF")
         {
-            //Use a recrusion to clear the previos selection 
+            //Use a recrusion to clear the previous selection 
             TreeNode current = trv_Daily_Events.Nodes[0];
             while (current != null)
             {
-                if (current != e.Node)
+                if (current != nod)
                 {
                     current.BackColor = (Color)current.Tag;
                     current.ForeColor = trv_Daily_Events.ForeColor;
@@ -170,10 +175,10 @@ namespace To_Do_App
                     current = null;
             }
             //Set the back color of the selected node
-            if (trv_Daily_Events.SelectedNode != null && trv_Daily_Events.SelectedNode == e.Node)
+            if (trv_Daily_Events.SelectedNode != null && trv_Daily_Events.SelectedNode == nod)
             {
-                e.Node.BackColor = ColorTranslator.FromHtml("#3399FF");
-                e.Node.ForeColor = Color.White;
+                nod.BackColor = ColorTranslator.FromHtml(color);
+                nod.ForeColor = Color.White;
             }
         }
 
@@ -188,37 +193,21 @@ namespace To_Do_App
         
         private void btn_Up_Click(object sender, EventArgs e)
         {
-            string ename;
-            Event selected_event= null;
-            if (trv_Daily_Events.SelectedNode != null)
-            {
-                string nodeName = trv_Daily_Events.SelectedNode.Name;
-                ename = trv_Daily_Events.SelectedNode.Text;
-                foreach (Event eve in file.All_Events)
-                {
-                    selected_event = Find_Event(eve, ename);
-                    if (selected_event != null)
-                    {
-                        break;
-                    }
-                }
-                Move_Event(selected_event, true);
-                trv_Daily_Events.Nodes.Clear();
-                Write_Tree(trv_Daily_Events, mnc_Date.SelectionRange.Start);
-                trv_Daily_Events.SelectedNode = trv_Daily_Events.Nodes.Find(nodeName, true)[0];
-                trv_Daily_Events.SelectedNode.BackColor = ColorTranslator.FromHtml("#3399FF");
-                trv_Daily_Events.SelectedNode.ForeColor = Color.White;
-            }
+            Button_Click(true);
         }
 
         private void btn_Down_Click(object sender, EventArgs e)
+        {
+            Button_Click(false);
+        } 
+        
+        public void Button_Click(bool up)
         {
             string ename;
             Event selected_event = null;
             if (trv_Daily_Events.SelectedNode != null)
             {
                 string nodeName = trv_Daily_Events.SelectedNode.Name;
-                TreeNode temp = trv_Daily_Events.SelectedNode;
                 ename = trv_Daily_Events.SelectedNode.Text;
                 foreach (Event eve in file.All_Events)
                 {
@@ -228,14 +217,13 @@ namespace To_Do_App
                         break;
                     }
                 }
-                Move_Event(selected_event, false);
+                Move_Event(selected_event, up);
                 trv_Daily_Events.Nodes.Clear();
                 Write_Tree(trv_Daily_Events, mnc_Date.SelectionRange.Start);
                 trv_Daily_Events.SelectedNode = trv_Daily_Events.Nodes.Find(nodeName, true)[0];
-                trv_Daily_Events.SelectedNode.BackColor = ColorTranslator.FromHtml("#3399FF");
-                trv_Daily_Events.SelectedNode.ForeColor = Color.White;
+                Highlight_Node(trv_Daily_Events.Nodes.Find(nodeName, true)[0], "#28b3c9");
             }
-        }        
+        }
     }
 }
 
