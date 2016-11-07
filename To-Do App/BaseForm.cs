@@ -174,136 +174,7 @@ namespace To_Do_App
                 new_event.Parent_Event.Completion_Children = (j / i);
             }
         }
-
-        /*
-        public void Write_Tree(TreeView Tree_View)
-        {
-            
-            foreach (Project p in file.All_Projects)
-            {
-                if (p.Done == true)
-                TreeNode nod = new TreeNode();
-                if (p.Done == true)
-                {
-                    nod.BackColor = Color.LightGray;
-                }
-                else if (p.Due_Date)
-                {
-                    nod.BackColor = Color.LightCoral;
-                }
-                else if (p.Completion != 0)
-                {
-                    nod.BackColor = Color.LightBlue;
-                }
-                else 
-                { 
-                    nod.BackColor = Color.LightGreen;
-                }
-                nod.Text = p.Title;
-                nod.Name = "trn_" + p.Title;
-                nod.Tag = p.Title;
-                int j = nod.Text.Length/3 + 1;
-                for (int i = 0; i < (j); i++)
-                {
-                    nod.Text += " ";
-                }
-                Tree_View.Nodes.Add(nod);
-                Tree_View.SelectedNode = nod;
-                Tree_View.SelectedNode.NodeFont = new Font(Tree_View.Font, FontStyle.Bold);
-                foreach (Event e in p.All_Events)
-                {                  
-                    TreeNode node = new TreeNode();
-                    if (e.Done == true)
-                    {
-                        node.BackColor = Color.LightGray;
-                    }
-                    else if (e.Due_Date)
-                    {
-                        node.BackColor = Color.LightCoral;
-                    }
-                    else if (e.Completion != 0)
-                    {
-                        node.BackColor = Color.LightBlue;
-                    }
-                    else
-                    {
-                        node.BackColor = Color.LightGreen;
-                    }
-                    node.Text = e.Title;
-                    node.Tag = e.Title;
-                    node.Name = "trn_" + e.Title;
-                    Tree_View.SelectedNode.Nodes.Add(node);
-                }
-            }
-            foreach (Event e in file.Loose_Events)
-            {
-                TreeNode node = new TreeNode();
-                if (e.Done == true)
-                {
-                    node.BackColor = Color.LightGray;
-                }
-                else if (e.Due_Date)
-                {
-                    node.BackColor = Color.LightCoral;
-                }
-                else if (e.Completion != 0)
-                {
-                    node.BackColor = Color.LightBlue;
-                }
-                else
-                {
-                    node.BackColor = Color.LightGreen;
-                }
-                node.Text = e.Title;
-                node.Tag = e.Title;
-                node.Name = "trn_" + e.Title;
-                Tree_View.Nodes.Add(node);
-                Tree_View.SelectedNode = node;
-            }
-            Tree_View.ExpandAll();
-            
-        }
-        /*
-        public void Write_List(ListView List_View, bool proj, Project project = null)
-        {
-            if (proj == true)
-            {
-                foreach (Project p in file.All_Projects)
-                {
-                    ListViewItem item = new ListViewItem();
-                    item.Text = p.Title;
-                    item.Name = "lsi_" + p.Title;
-                    item.SubItems.Add(p.Completed.ToString());
-                    List_View.Items.Add(item);
-                }
-            }
-            else
-            {
-                if (project == null)
-                {
-                    foreach (Event ev in file.Loose_Events)
-                    {
-                        ListViewItem item = new ListViewItem();
-                        item.Text = ev.Title;
-                        item.Name = "lsi_" + ev.Title;
-                        item.SubItems.Add(ev.Completed.ToString());
-                        List_View.Items.Add(item);
-                    }
-                }
-                else
-                {
-                    foreach (Event ev in project.All_Events)
-                    {
-                        ListViewItem item = new ListViewItem();
-                        item.Text = ev.Title;
-                        item.Name = "lsi_" + ev.Title;
-                        item.SubItems.Add(ev.Completed.ToString());
-                        List_View.Items.Add(item);
-                    }
-                }
-            }
-        }
-        */
+        
         OpenFileDialog ofd = new OpenFileDialog();
         SaveFileDialog sfd = new SaveFileDialog();
         static public To_Do_File file = new To_Do_File();
@@ -317,19 +188,7 @@ namespace To_Do_App
         }
 
         protected virtual void Open_File() 
-        {
-            //ofd.Filter = "TDF|*.tdf";
-            //ofd.Title = "Select File to Open";
-            //string De_Serial;
-            //if (ofd.ShowDialog() == DialogResult.OK)
-            //{
-            //    System.IO.StreamReader input = new System.IO.StreamReader(ofd.FileName);
-            //    De_Serial = input.ReadToEnd();
-            //    input.Close();
-            //    file = JsonConvert.DeserializeObject<To_Do_File>(De_Serial);
-            //    SaveFile = ofd.FileName;
-            //}
-
+        {           
             ofd.Filter = "TDF|*.tdf";
             ofd.Title = "Select File to Open";
             string De_Serial;
@@ -354,19 +213,7 @@ namespace To_Do_App
         }
 
         protected virtual void Save_File()
-        {
-            //if (SaveFile != "")
-            //{
-            //    string Serial;
-            //    Serial = JsonConvert.SerializeObject(file, Formatting.Indented, new JsonSerializerSettings { PreserveReferencesHandling = PreserveReferencesHandling.Objects });
-            //    System.IO.StreamWriter output = new System.IO.StreamWriter(SaveFile);
-            //    output.Write(Serial);
-            //    output.Close();
-            //}
-            //else
-            //{
-            //    Save_As_File();
-            //}
+        {            
             var _jsonSettings = new JsonSerializerSettings()
             {
                 TypeNameHandling = TypeNameHandling.Auto,
@@ -444,6 +291,125 @@ namespace To_Do_App
                 Event old = current_list[index + 1];
                 current_list[index + 1] = current_list[index];
                 current_list[index] = old;
+            }
+        }
+
+        public void Write_List(ListView List_View, Event selected_event = null)
+        {
+            if (selected_event == null)
+            {
+                foreach (Event e in file.All_Events)
+                {
+                    ListViewItem item = new ListViewItem();
+                    item.Text = e.Title;
+                    item.Name = "lsi_" + e.Title;
+                    if (e.Due_Date == true)
+                        item.SubItems.Add(e.Completed.ToString("MM/dd/yyyy - hh:00 tt"));
+                    List_View.Items.Add(item);
+
+                }
+            }
+            else
+            {
+                foreach (Event ev in selected_event.Child_Events)
+                {
+                    ListViewItem item = new ListViewItem();
+                    item.Text = ev.Title;
+                    item.Name = "lsi_" + ev.Title;
+                    if (ev.Due_Date == true)
+                        item.SubItems.Add(ev.Completed.ToString("MM/dd/yyyy - hh:00 tt"));
+                    List_View.Items.Add(item);
+                }
+            }
+        }
+
+        public void Write_Tree(TreeView Tree_View, DateTime Date)
+        {
+
+            foreach (Event e in file.All_Events)
+            {
+                if (Date > e.Completed && e.Done)
+                {
+
+                }
+                else
+                {
+                    TreeNode nod = new TreeNode();
+                    if (e.Done == true)
+                    {
+                        nod.BackColor = Color.LightGray;
+                    }
+                    else if (e.Due_Date)
+                    {
+                        nod.BackColor = Color.LightCoral;
+                    }
+                    else if (e.Completion != 0)
+                    {
+                        nod.BackColor = Color.LightBlue;
+                    }
+                    else
+                    {
+                        nod.BackColor = Color.LightGreen;
+                    }
+
+                    nod.Tag = nod.BackColor;
+                    nod.Text = e.Title;
+                    nod.Name = "trn_" + e.Title;
+                    Tree_View.Nodes.Add(nod);
+                    Tree_View.SelectedNode = nod;
+                    Write_Node(Tree_View, e, Date);
+                }
+            }
+            Tree_View.ExpandAll();
+            Tree_View.Refresh();
+            Tree_View.SelectedNode = null;
+        }
+
+        public void Write_Node(TreeView Tree_View, Event write_event, DateTime Dat)
+        {
+            foreach (Event ev in write_event.Child_Events)
+            {
+
+                TreeNode node = new TreeNode();
+                if (ev.Done == true)
+                {
+                    node.BackColor = Color.LightGray;
+                }
+                else if (ev.Due_Date)
+                {
+                    node.BackColor = Color.LightCoral;
+                }
+                else if (ev.Completion != 0)
+                {
+                    node.BackColor = Color.LightBlue;
+                }
+                else
+                {
+                    node.BackColor = Color.LightGreen;
+                }
+
+                node.Text = ev.Title;
+                node.Tag = node.BackColor;
+                node.Name = "trn_" + ev.Title;
+
+                if (Dat > ev.Completed && ev.Done)
+                {
+                }
+                else
+                {
+                    Tree_View.SelectedNode.Nodes.Add(node);
+                    if (ev.Child_Events.Count != 0)
+                    {
+                        Tree_View.SelectedNode = node;
+                    }
+                    else
+                    {
+
+                    }
+                }
+                Write_Node(Tree_View, ev, Dat);
+                if (ev.Child_Events.Count != 0)
+                    Tree_View.SelectedNode = Tree_View.SelectedNode.Parent;
             }
         }
     }

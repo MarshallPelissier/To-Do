@@ -42,7 +42,6 @@
             this.btn_Delete_Event = new System.Windows.Forms.Button();
             this.btn_Up = new System.Windows.Forms.Button();
             this.btn_Down = new System.Windows.Forms.Button();
-            this.txt_selected = new System.Windows.Forms.TextBox();
             this.pnl_Date.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).BeginInit();
             this.SuspendLayout();
@@ -65,7 +64,6 @@
             this.trv_Daily_Events.TabIndex = 2;
             this.trv_Daily_Events.TabStop = false;
             this.trv_Daily_Events.BeforeSelect += new System.Windows.Forms.TreeViewCancelEventHandler(this.trv_Daily_Events_BeforeSelect);
-            this.trv_Daily_Events.AfterSelect += new System.Windows.Forms.TreeViewEventHandler(this.trv_Daily_Events_AfterSelect);
             this.trv_Daily_Events.NodeMouseClick += new System.Windows.Forms.TreeNodeMouseClickEventHandler(this.trv_Daily_Events_NodeMouseClick);
             this.trv_Daily_Events.DoubleClick += new System.EventHandler(this.trv_Daily_Events_DoubleClick);
             // 
@@ -81,7 +79,6 @@
             this.lsv_Due_Dates.TabIndex = 4;
             this.lsv_Due_Dates.UseCompatibleStateImageBehavior = false;
             this.lsv_Due_Dates.View = System.Windows.Forms.View.Details;
-            this.lsv_Due_Dates.SelectedIndexChanged += new System.EventHandler(this.lsv_Due_Dates_SelectedIndexChanged);
             // 
             // clm_Events
             // 
@@ -166,22 +163,11 @@
             this.btn_Down.UseVisualStyleBackColor = false;
             this.btn_Down.Click += new System.EventHandler(this.btn_Down_Click);
             // 
-            // txt_selected
-            // 
-            this.txt_selected.Enabled = false;
-            this.txt_selected.Font = new System.Drawing.Font("Tahoma", 24F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_selected.Location = new System.Drawing.Point(350, 145);
-            this.txt_selected.Name = "txt_selected";
-            this.txt_selected.Size = new System.Drawing.Size(250, 46);
-            this.txt_selected.TabIndex = 1;
-            this.txt_selected.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(884, 661);
-            this.Controls.Add(this.txt_selected);
             this.Controls.Add(this.btn_Down);
             this.Controls.Add(this.btn_Up);
             this.Controls.Add(this.btn_Delete_Event);
@@ -205,7 +191,6 @@
             this.Controls.SetChildIndex(this.btn_Delete_Event, 0);
             this.Controls.SetChildIndex(this.btn_Up, 0);
             this.Controls.SetChildIndex(this.btn_Down, 0);
-            this.Controls.SetChildIndex(this.txt_selected, 0);
             this.pnl_Date.ResumeLayout(false);
             this.pnl_Date.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.bindingSource1)).EndInit();
@@ -229,7 +214,6 @@
         private System.Windows.Forms.Button btn_Delete_Event;
         private System.Windows.Forms.Button btn_Up;
         private System.Windows.Forms.Button btn_Down;
-        private System.Windows.Forms.TextBox txt_selected;
     }
 }
 

@@ -24,7 +24,7 @@ namespace To_Do_App
             dtp_Day.Value = day;
             dtp_Complete_Date.Value = day;
             Day = day;
-            Write_Tree(trv_All_Events);
+            Write_Tree(trv_All_Events, Day);
             //need to write to treeview
             if (parent != "")
             {
@@ -32,6 +32,7 @@ namespace To_Do_App
                 txt_Project.Text = parent;
             }
         }
+
         public Add_Event(Event new_event)
         {
             InitializeComponent();
@@ -44,7 +45,7 @@ namespace To_Do_App
             rtb_Description.Text = new_event.Description;
             edit_event = new_event;
             Parent_Event = new_event.Parent_Event;
-            Write_Tree(trv_All_Events);
+            Write_Tree(trv_All_Events, Day);
             editing = true;
             //need to write to treeview
             //and select parent event and check checkbox
@@ -62,6 +63,7 @@ namespace To_Do_App
             dtp_Complete_Date.Enabled = false;
             Completion = 0;
         }
+
         private void rad_4th_CheckedChanged(object sender, EventArgs e)
         {
 
@@ -274,88 +276,7 @@ namespace To_Do_App
         bool editing = false;
         Event edit_event;
         Event Parent_Event = null;
-
-        
-
-        public void Write_Tree(TreeView Tree_View)
-        {
-
-            foreach (Event e in file.All_Events)
-            {
-                if (Day > e.Completed && e.Done)
-                {
-
-                }
-                else
-                {
-                    TreeNode nod = new TreeNode();
-                    if (e.Done == true)
-                    {
-                        nod.BackColor = Color.LightGray;
-                    }
-                    else if (e.Due_Date)
-                    {
-                        nod.BackColor = Color.LightCoral;
-                    }
-                    else if (e.Completion != 0)
-                    {
-                        nod.BackColor = Color.LightBlue;
-                    }
-                    else
-                    {
-                        nod.BackColor = Color.LightGreen;
-                    }
-                    nod.Tag = nod.BackColor;
-                    nod.Text = e.Title;
-                    nod.Name = "trn_" + e.Title;
-                    Tree_View.Nodes.Add(nod);
-                    Tree_View.SelectedNode = nod;
-                    Write_Node(Tree_View, e);
-                }
-            }
-            Tree_View.ExpandAll();
-        }
-
-        public void Write_Node(TreeView Tree_View, Event write_event)
-        {
-            foreach (Event ev in write_event.Child_Events)
-            {
-                TreeNode node = new TreeNode();
-                if (ev.Done == true)
-                {
-                    node.BackColor = Color.LightGray;
-                    
-                }
-                else if (ev.Due_Date)
-                {
-                    node.BackColor = Color.LightCoral;
-                }
-                else if (ev.Completion != 0)
-                {
-                    node.BackColor = Color.LightBlue;
-                }
-                else
-                {
-                    node.BackColor = Color.LightGreen;
-                }
-                node.Text = ev.Title;
-                node.Tag = node.BackColor;
-                node.Name = "trn_" + ev.Title;
-                if (Day > ev.Completed && ev.Done)
-                {
-                }
-                else
-                {
-                    Tree_View.SelectedNode.Nodes.Add(node);
-                    if (ev.Child_Events.Count != 0)
-                    {
-                        Tree_View.SelectedNode = node;
-                    }
-                }
-                Write_Node(Tree_View, ev);
-            }
-        }        
-
+       
         private void trv_All_Events_DoubleClick(object sender, EventArgs e)
         {
             trv_All_Events.SelectedNode = null;

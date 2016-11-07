@@ -48,10 +48,10 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestCertificateThumbprint>1D9F14709E2806EE1EA5E3F0FB2924115174303C</ManifestCertificateThumbprint>
+    <ManifestCertificateThumbprint>73076CE54162B4340F7BF05F1CE73D6C4B023FDC</ManifestCertificateThumbprint>
   </PropertyGroup>
   <PropertyGroup>
-    <ManifestKeyFile>To-Do App_TemporaryKey.pfx</ManifestKeyFile>
+    <ManifestKeyFile>To-Do App_2_TemporaryKey.pfx</ManifestKeyFile>
   </PropertyGroup>
   <PropertyGroup>
     <GenerateManifests>true</GenerateManifests>
@@ -101,9 +101,6 @@
     <Compile Include="Form1.Designer.cs">
       <DependentUpon>Form1.cs</DependentUpon>
     </Compile>
-    <Compile Include="MyTreeView.cs">
-      <SubType>Component</SubType>
-    </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="To_Do_File.cs" />
@@ -138,6 +135,7 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="To-Do App_2_TemporaryKey.pfx" />
     <None Include="To-Do App_TemporaryKey.pfx" />
   </ItemGroup>
   <ItemGroup>
